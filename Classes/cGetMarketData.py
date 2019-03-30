@@ -1,8 +1,8 @@
 import websocket
 import threading
+
 from Classes import cRofexLogin
 from Classes import cRofexMessage as rfxMsg
-
 from time import sleep
 
 
@@ -16,7 +16,7 @@ class cGetMarketData():
         self.sym = ""
         self.ws = websocket.WebSocketApp
         self.numMessages = 0
-        # self.messages = []
+        self.currentMarketDict={}
         self.runWS()
 
     def runWS(self):
@@ -49,15 +49,11 @@ class cGetMarketData():
         self.numMessages += 1
 
         try:
-            print("Calling cRofexMessage ")
-            q = rfxMsg.cRofexMessage(message)
-            # print("Nro Mensajes",self.numMessages)
-            print("Mensaje recibido en getMD:", message)
-            # self.messages.append(message)
-            print("Array from cRofex Message", q.md)
 
-            # self.md.append(q.getLastMessage())
-            # print("Len md en cSuscriptV2:", len(self.md))
+            qRFX = rfxMsg.cRofexMessage(message)
+
+            self.currentMarketDict[qRFX.getSym()] = qRFX.getLastMessage()
+            self.goRobot()
 
         except:
 
@@ -79,10 +75,16 @@ class cGetMarketData():
     def buildMessage(self):
         return "{\"type\":\"" + self.user.type_ + "\",\"level\":" + self.user.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.user.marketId_ + "\"}]}"
 
+    def goRobot(self):
+        print("Dictionary : ", self.currentMarketDict)
+        ticker0= self.currentMarketDict[self.symbols[0]]
+        ticker1= self.currentMarketDict[self.symbols[1]]
+        print("Ticker 0 Bid / Size", ticker0[3], ticker0[4], ticker0[6])
+
 
 if __name__ == '__main__':
     user1 = cRofexLogin.cSetUpEnvironment()
-    md1 = cGetMarketData(user1, ["DoJun19", "RFX20Jun19"])
+    suscription1 = cGetMarketData(user1, ["DoJun19", "RFX20Jun19"])
 
 else:
     pass

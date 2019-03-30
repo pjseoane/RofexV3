@@ -1,6 +1,7 @@
 from itertools import count #itertools es para contar la cantidad de instancias de una clase
 import simplejson
 
+
 class cRofexMessage():
 
     _ids = count(0)
@@ -19,13 +20,14 @@ class cRofexMessage():
         self.sym = ""
         self.marketId = ""
         self.msgProcesado = []
+        #self.msgProcesado = self.buildMsgProcesado()
 
         self.msg = simplejson.loads(message)
         msgType = self.msg['type'].upper()
 
         if msgType == 'MD':
             self.incomingMD()
-            self.processMessage()
+            # self.processMessage()
 
         elif msgType == 'OR':
             print("En Mensaje OR")
@@ -53,11 +55,16 @@ class cRofexMessage():
             self.offerSize = self.msg['marketData']['OF'][0]['size']
 
         # Aca armar una matrix o algo
-        self.msgProcesado = [self.id, self.timestamp, self.marketId, self.sym, self.bid, self.offer, self.bidSize, self.offerSize]
-        self.md.append(self.getLastMessage())
+        # self.msgProcesado = [self.id, self.timestamp, self.marketId, self.sym, self.bid, self.offer, self.bidSize, self.offerSize]
+        self.msgProcesado = self.buildMsgProcesado()
+        self.md.append(self.msgProcesado)
         # print("Len md en cRofexMessage:", len(self.md))
 
+    def buildMsgProcesado(self):
+        return [self.id, self.timestamp, self.marketId, self.sym, self.bid, self.offer, self.bidSize, self.offerSize]
 
+    def getSym(self):
+        return self.sym
 
     def getBid(self):
         return self.bid
@@ -71,9 +78,9 @@ class cRofexMessage():
     def getOfferSize(self):
         return self.offerSize
 
-
-    def processMessage(self):
-        print("Process msg OK")
+    @staticmethod
+    def processMessage():
+        print("Mensaje procesado")
         #self.md.append([self.msgType,self.timestamp, self.marketId,self.sym, self.bid, self.offer, self.bidSize, self.offerSize, self.id])
 
     def printMessage(self):

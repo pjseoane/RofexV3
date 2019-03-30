@@ -19,16 +19,8 @@ class cSetUpEnvironment():
         self.usr = "pjseoane232"
         self.pswd = "AiZkiC5#"
         self.account = "REM232"
-
-    # def __init__(self, usr, pswd, account):
-
-        # self.usr= usr
-        # self.pswd= pswd
-        # self.account= account
-        self.token= ""
-        self.url= ""
-        # self.r = ""
-
+        self.token = ""
+        self.url = ""
         self.s = requests.Session()
         self.login()
 
@@ -148,7 +140,8 @@ if __name__ == '__main__':
     print("En main")
     user1 = cSetUpEnvironment()
     #user1 = cSetUpEnvironment("pjseoane232", "AiZkiC5#","REM232")
+    print(user1.activeWSEndpoint)
     print("Instrumentos :",user1.instrumentos())
     print("Instruments DetailsAll:",user1.instrumentsDetailsAll())
 else:
-    print("Nombre de Clase:", __name__)
+    print("Nombre de Clase/else:", __name__)
