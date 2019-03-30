@@ -1,12 +1,14 @@
 import websocket
 import threading
 from Classes import cRofexLogin
+from Classes import cRofexMessage as rfxMsg
+
 from time import sleep
 
 
 class cGetMarketData():
 
-    messages = []
+    # messages = []
 
     def __init__(self, user, symbols):
         self.user = user
@@ -14,7 +16,7 @@ class cGetMarketData():
         self.sym = ""
         self.ws = websocket.WebSocketApp
         self.numMessages = 0
-        self.messages = []
+        # self.messages = []
         self.runWS()
 
     def runWS(self):
@@ -48,16 +50,17 @@ class cGetMarketData():
 
         try:
             print("Calling cRofexMessage ")
-            # q = rMsg.cRofexMessage(message)
-            print("Nro Mensajes",self.numMessages)
-            print("Mensaje recibido:", message)
-            self.messages.append(message)
+            q = rfxMsg.cRofexMessage(message)
+            # print("Nro Mensajes",self.numMessages)
+            print("Mensaje recibido en getMD:", message)
+            # self.messages.append(message)
+            print("Array from cRofex Message", q.md)
 
             # self.md.append(q.getLastMessage())
             # print("Len md en cSuscriptV2:", len(self.md))
 
         except:
-            # print("Error al procesar mensaje recibido:--->>> " + msg)
+
             print("Error al procesar mensaje recibido:--->>> ", message)
 
     def on_error(self, error):
