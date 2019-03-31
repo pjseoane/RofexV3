@@ -1,8 +1,8 @@
 import websocket
 import threading
+import simplejson
 
 from Classes import cRofexLogin
-from Classes import cRofexMessage as rfxMsg
 from time import sleep
 
 
@@ -16,7 +16,7 @@ class cGetMarketData():
         self.sym = ""
         self.ws = websocket.WebSocketApp
         self.numMessages = 0
-        self.currentMarketDict={}
+        self.marketDataDict = {}
         self.runWS()
 
     def runWS(self):
@@ -49,15 +49,24 @@ class cGetMarketData():
         self.numMessages += 1
 
         try:
+            msg = simplejson.loads(message)
+            msgType = msg['type'].upper()
 
-            qRFX = rfxMsg.cRofexMessage(message)
+            if msgType == 'MD':
+                # Arma y carga el Dictionary
+                self.sym = msg['instrumentId']['symbol']
+                self.marketDataDict[self.sym] = msg
 
-            self.currentMarketDict[qRFX.getSym()] = qRFX.getLastMessage()
-            self.goRobot()
+                self.goRobot()
+
+            elif msgType == 'OR':
+                print("En Mensaje OR")
+                print(msg)
+            else:
+                print("Tipo de Mensaje Recibido No soportado: " + msg)
 
         except:
-
-            print("Error al procesar mensaje recibido:--->>> ", message)
+            print("Error al procesar mensaje recibido:--->>> ", msg)
 
     def on_error(self, error):
         print("Salio por error: ", error)
@@ -75,11 +84,31 @@ class cGetMarketData():
     def buildMessage(self):
         return "{\"type\":\"" + self.user.type_ + "\",\"level\":" + self.user.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.user.marketId_ + "\"}]}"
 
+    def getBidPrice(self, ticker):
+        msg = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
+        return msg if msg else 0
+
+    def getBidSize(self, ticker):
+        msg = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
+        return msg if msg else 0
+
+    def getOfferPrice(self, ticker):
+        msg = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
+        return msg if msg else 0
+
+    def getOfferSize(self, ticker):
+        msg = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
+        return msg if msg else 0
+        
     def goRobot(self):
-        print("Dictionary : ", self.currentMarketDict)
-        ticker0= self.currentMarketDict[self.symbols[0]]
-        ticker1= self.currentMarketDict[self.symbols[1]]
-        print("Ticker 0 Bid / Size", ticker0[3], ticker0[4], ticker0[6])
+        print("marketDataDict: ", self.marketDataDict)
+
+        try:
+            for sym in self.symbols:
+                print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym), "/", self.getOfferSize(sym))
+
+        except:
+            print("Error goRobot()", sym, self.marketDataDict.__len__())
 
 
 if __name__ == '__main__':

@@ -20,13 +20,14 @@ class cRofexMessage():
         self.sym = ""
         self.marketId = ""
         self.msgProcesado = []
+        self.dict2 = {}
         #self.msgProcesado = self.buildMsgProcesado()
 
         self.msg = simplejson.loads(message)
         msgType = self.msg['type'].upper()
 
         if msgType == 'MD':
-            self.incomingMD()
+            self.incomingMD2()
             # self.processMessage()
 
         elif msgType == 'OR':
@@ -35,30 +36,37 @@ class cRofexMessage():
         else:
             print("Tipo de Mensaje Recibido No soportado: " + self.msg)
 
+    def incomingMD2(self):
+        pass
+
     def incomingMD(self):
-
-        self.timestamp = self.msg['timestamp']
-        self.marketId = self.msg['instrumentId']['marketId']
-        self.sym = self.msg['instrumentId']['symbol']
-        # Aca hay un problema si no hay bid u offer pq solo viene ['marketData']
-        bidMsg = self.msg['marketData']['BI']
-        offerMsg = self.msg['marketData']['OF']
-
-        if bidMsg:
-
-            self.bid = self.msg['marketData']['BI'][0]['price']
-            self.bidSize = self.msg['marketData']['BI'][0]['size']
-
-        if offerMsg:
-
-            self.offer = self.msg['marketData']['OF'][0]['price']
-            self.offerSize = self.msg['marketData']['OF'][0]['size']
-
-        # Aca armar una matrix o algo
-        # self.msgProcesado = [self.id, self.timestamp, self.marketId, self.sym, self.bid, self.offer, self.bidSize, self.offerSize]
-        self.msgProcesado = self.buildMsgProcesado()
-        self.md.append(self.msgProcesado)
-        # print("Len md en cRofexMessage:", len(self.md))
+        pass
+        # self.timestamp = self.msg['timestamp']
+        # self.marketId = self.msg['instrumentId']['marketId']
+        # self.sym = self.msg['instrumentId']['symbol']
+        #
+        #
+        #
+        #
+        # # Aca hay un problema si no hay bid u offer pq solo viene ['marketData']
+        # bidMsg = self.msg['marketData']['BI']
+        # offerMsg = self.msg['marketData']['OF']
+        #
+        # if bidMsg:
+        #
+        #     self.bid = self.msg['marketData']['BI'][0]['price']
+        #     self.bidSize = self.msg['marketData']['BI'][0]['size']
+        #
+        # if offerMsg:
+        #
+        #     self.offer = self.msg['marketData']['OF'][0]['price']
+        #     self.offerSize = self.msg['marketData']['OF'][0]['size']
+        #
+        # # Aca armar una matrix o algo
+        # # self.msgProcesado = [self.id, self.timestamp, self.marketId, self.sym, self.bid, self.offer, self.bidSize, self.offerSize]
+        # self.msgProcesado = self.buildMsgProcesado()
+        # self.md.append(self.msgProcesado)
+        # # print("Len md en cRofexMessage:", len(self.md))
 
     def buildMsgProcesado(self):
         return [self.id, self.timestamp, self.marketId, self.sym, self.bid, self.offer, self.bidSize, self.offerSize]
