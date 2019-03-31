@@ -3,6 +3,7 @@ import threading
 import simplejson
 
 from Classes import cRofexLogin
+from Classes import goRobot
 from time import sleep
 
 
@@ -88,56 +89,75 @@ class cGetMarketData():
         return "{\"type\":\"" + self.user.type_ + "\",\"level\":" + self.user.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.user.marketId_ + "\"}]}"
 
     def getBidPrice(self, ticker):
-        msg = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
-        return msg if msg else 0
+        try:
+            m = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
+        except:
+            m = 0
+        return m
 
     def getBidSize(self, ticker):
-        msg = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
-        return msg if msg else 0
+        try:
+            m = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
+        except:
+            m = 0
+        return m
 
     def getOfferPrice(self, ticker):
-        msg = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
-        return msg if msg else 0
+        try:
+            m = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
+        except:
+            m = 0
+        return m
 
     def getOfferSize(self, ticker):
-        msg = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
-        return msg if msg else 0
+        try:
+            m = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
+        except:
+            m = 0
+        return m
 
-    def getContractLowLimit(self,ticker):
+    def getContractLowLimit(self, ticker):
         return self.contractDetail[ticker]['instrument']['lowLimitPrice']
 
-    def getContractHighLimit(self,ticker):
+    def getContractHighLimit(self, ticker):
         return self.contractDetail[ticker]['instrument']['highLimitPrice']
 
-    def getContractMinPriceIncrement(self,ticker):
+    def getContractMinPriceIncrement(self, ticker):
         return self.contractDetail[ticker]['instrument']['minPriceIncrement']
 
-    def getContractMultiplier(self,ticker):
+    def getContractMultiplier(self, ticker):
         return self.contractDetail[ticker]['instrument']['contractMultiplier']
 
-    def getMaturityDate(self,ticker):
+    def getMaturityDate(self, ticker):
         return self.contractDetail[ticker]['instrument']['maturityDate']
 
-        
     def goRobot(self):
         # print("marketDataDict: ", self.marketDataDict)
+        # Chequer si el dictionary ya tiene tantos datos como symbols
+        if self.marketDataDict.__len__() == len(self.symbols):
+            try:
 
-        try:
-            for sym in self.symbols:
-                print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym), "/", self.getOfferSize(sym))
-                print(sym, "Low limit: ", self.getContractLowLimit(sym), "High Limit: ", self.getContractHighLimit(sym), "Maturity: ",self.getMaturityDate(sym))
-        except:
-            pass
-            # print("Error goRobot()", sym, self.marketDataDict.__len__())
+                rob1 = goRobot.cGoRobot(self.marketDataDict)
+                rob1.RobOutput()
+                for sym in self.symbols:
+                    # print(self.marketDataDict)
+                    print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym), "/", self.getOfferSize(sym))
+                    print(sym, "Low limit: ", self.getContractLowLimit(sym), "High Limit: ",
+                          self.getContractHighLimit(sym), "Maturity: ", self.getMaturityDate(sym))
 
+            except:
+                #pass
+                print("Error goRobot()")
 
 if __name__ == '__main__':
     newUser = cRofexLogin.cSetUpEnvironment()
 
     ticker1 = "DoJun19"
     ticker2 = "RFX20Jun19"
-    #print(newUser.instrumentDetail(ticker1, 'ROFX'))
-    suscription1 = cGetMarketData(newUser, [ticker1, ticker2])
+    suscriptTuple = (ticker1, ticker2)
+    # print(newUser.instrumentDetail(ticker1, 'ROFX'))
+    suscription1 = cGetMarketData(newUser, suscriptTuple)
+    # suscription2 = cGetMarketData(newUser, [ticker1])
 
 else:
     pass
