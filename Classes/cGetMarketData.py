@@ -17,6 +17,7 @@ class cGetMarketData():
         self.ws = websocket.WebSocketApp
         self.numMessages = 0
         self.marketDataDict = {}
+        self.contractDetail = {}
         self.runWS()
 
     def runWS(self):
@@ -41,6 +42,8 @@ class cGetMarketData():
         else:
 
             for self.sym in self.symbols:
+                # Arma diccionario de detalles contratos
+                self.contractDetail[self.sym] = self.user.instrumentDetail(self.sym, 'ROFX')
                 self.ws.send(self.buildMessage)
                 print("Sent Suscription msg for ticker", self.sym)
                 sleep(1)
@@ -99,21 +102,42 @@ class cGetMarketData():
     def getOfferSize(self, ticker):
         msg = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
         return msg if msg else 0
+
+    def getContractLowLimit(self,ticker):
+        return self.contractDetail[ticker]['instrument']['lowLimitPrice']
+
+    def getContractHighLimit(self,ticker):
+        return self.contractDetail[ticker]['instrument']['highLimitPrice']
+
+    def getContractMinPriceIncrement(self,ticker):
+        return self.contractDetail[ticker]['instrument']['minPriceIncrement']
+
+    def getContractMultiplier(self,ticker):
+        return self.contractDetail[ticker]['instrument']['contractMultiplier']
+
+    def getMaturityDate(self,ticker):
+        return self.contractDetail[ticker]['instrument']['maturityDate']
+
         
     def goRobot(self):
-        print("marketDataDict: ", self.marketDataDict)
+        # print("marketDataDict: ", self.marketDataDict)
 
         try:
             for sym in self.symbols:
                 print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym), "/", self.getOfferSize(sym))
-
+                print(sym, "Low limit: ", self.getContractLowLimit(sym), "High Limit: ", self.getContractHighLimit(sym), "Maturity: ",self.getMaturityDate(sym))
         except:
-            print("Error goRobot()", sym, self.marketDataDict.__len__())
+            pass
+            # print("Error goRobot()", sym, self.marketDataDict.__len__())
 
 
 if __name__ == '__main__':
-    user1 = cRofexLogin.cSetUpEnvironment()
-    suscription1 = cGetMarketData(user1, ["DoJun19", "RFX20Jun19"])
+    newUser = cRofexLogin.cSetUpEnvironment()
+
+    ticker1 = "DoJun19"
+    ticker2 = "RFX20Jun19"
+    #print(newUser.instrumentDetail(ticker1, 'ROFX'))
+    suscription1 = cGetMarketData(newUser, [ticker1, ticker2])
 
 else:
     pass
