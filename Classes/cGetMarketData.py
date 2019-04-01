@@ -8,7 +8,7 @@ from Classes import cAlgoIndex
 from time import sleep
 
 
-class cGetMarketData():
+class cGetMarketData:
 
     # messages = []
 
@@ -68,7 +68,7 @@ class cGetMarketData():
                 print("En Mensaje OR")
                 print(msg)
             else:
-                print("Tipo de Mensaje Recibido No soportado: " + msg)
+                print("Tipo de Mensaje Recibido No soportado: ", msg)
 
         except:
             print("Error al procesar mensaje recibido:--->>> ", msg)
@@ -89,8 +89,6 @@ class cGetMarketData():
     def buildMessage(self):
         return "{\"type\":\"" + self.user.type_ + "\",\"level\":" + self.user.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.user.marketId_ + "\"}]}"
 
-
-
     def getContractLowLimit(self, ticker):
         return self.contractDetail[ticker]['instrument']['lowLimitPrice']
 
@@ -110,6 +108,7 @@ class cGetMarketData():
         # print("marketDataDict: ", self.marketDataDict)
         # Chequer si el dictionary ya tiene tantos datos como symbols
         if self.marketDataDict.__len__() == len(self.symbols):
+
             try:
 
                 rob1 = cAlgoIndex.cAlgoIndex(self.marketDataDict, self.symbols)
@@ -120,6 +119,7 @@ class cGetMarketData():
                 #pass
                 print("Error goRobot()")
 
+
 if __name__ == '__main__':
     newUser = cRofexLogin.cSetUpEnvironment()
 
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     suscriptTuple = (ticker1, ticker2)
     # print(newUser.instrumentDetail(ticker1, 'ROFX'))
     suscription1 = cGetMarketData(newUser, suscriptTuple)
-    # suscription2 = cGetMarketData(newUser, [ticker1])
+
 
 else:
     pass

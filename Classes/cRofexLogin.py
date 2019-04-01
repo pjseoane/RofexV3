@@ -36,11 +36,6 @@ class cSetUpEnvironment():
             print("login() OK --->", self.token)
         else:
             print("Request Error.", __name__)
-            # self.loginSuccess = False
-
-    # def requestAPI(self):
-    #     headers = {'X-Auth-Token': self.token}
-    #     self.r = requests.get(self.url, headers=headers, verify=False)
 
     def retReq(self):
         # self.requestAPI()
@@ -60,6 +55,7 @@ class cSetUpEnvironment():
     def instrumentsDetailsAll(self):
         self.url = self.activeEndpoint + "rest/instruments/details"
         return self.retReq()
+
     def newSingleOrder(self, marketId, symbol, price, orderQty, ordType, side, timeInForce, account, cancelPrevious):
         self.url = self.activeEndpoint + "rest/order/newSingleOrder?marketId=" + marketId + "&symbol=" + symbol + "&price=" + price + "&orderQty=" + orderQty + "&ordType=" + ordType + "&side=" + side + "&timeInForce=" + timeInForce + "&account=" + account + "&cancelPrevious=" + cancelPrevious
         return self.retReq()
