@@ -141,9 +141,14 @@ class cGetMarketData():
                 rob1.RobOutput()
                 for sym in self.symbols:
                     # print(self.marketDataDict)
+                    # print("Elementos en Dictionary:", len(self.marketDataDict), self.marketDataDict)
                     print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym), "/", self.getOfferSize(sym))
-                    print(sym, "Low limit: ", self.getContractLowLimit(sym), "High Limit: ",
-                          self.getContractHighLimit(sym), "Maturity: ", self.getMaturityDate(sym))
+
+
+
+
+
+                    # print(sym, "Low limit: ", self.getContractLowLimit(sym), "High Limit: ", self.getContractHighLimit(sym), "Maturity: ", self.getMaturityDate(sym))
 
             except:
                 #pass
@@ -152,7 +157,7 @@ class cGetMarketData():
 if __name__ == '__main__':
     newUser = cRofexLogin.cSetUpEnvironment()
 
-    ticker1 = "DoJun19"
+    ticker1 = "DOJun19"
     ticker2 = "RFX20Jun19"
     suscriptTuple = (ticker1, ticker2)
     # print(newUser.instrumentDetail(ticker1, 'ROFX'))
