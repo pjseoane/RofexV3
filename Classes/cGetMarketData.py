@@ -3,7 +3,8 @@ import threading
 import simplejson
 
 from Classes import cRofexLogin
-from Classes import goRobot
+from Classes import cAlgoBase
+from Classes import cAlgoIndex
 from time import sleep
 
 
@@ -88,33 +89,7 @@ class cGetMarketData():
     def buildMessage(self):
         return "{\"type\":\"" + self.user.type_ + "\",\"level\":" + self.user.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.user.marketId_ + "\"}]}"
 
-    def getBidPrice(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
-        except:
-            m = 0
-        return m
 
-    def getBidSize(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
-        except:
-            m = 0
-        return m
-
-    def getOfferPrice(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
-        except:
-            m = 0
-        return m
-
-    def getOfferSize(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
-        except:
-            m = 0
-        return m
 
     def getContractLowLimit(self, ticker):
         return self.contractDetail[ticker]['instrument']['lowLimitPrice']
@@ -137,18 +112,9 @@ class cGetMarketData():
         if self.marketDataDict.__len__() == len(self.symbols):
             try:
 
-                rob1 = goRobot.cGoRobot(self.marketDataDict)
-                rob1.RobOutput()
-                for sym in self.symbols:
-                    # print(self.marketDataDict)
-                    # print("Elementos en Dictionary:", len(self.marketDataDict), self.marketDataDict)
-                    print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym), "/", self.getOfferSize(sym))
-
-
-
-
-
-                    # print(sym, "Low limit: ", self.getContractLowLimit(sym), "High Limit: ", self.getContractHighLimit(sym), "Maturity: ", self.getMaturityDate(sym))
+                rob1 = cAlgoIndex.cAlgoIndex(self.marketDataDict, self.symbols)
+                rob1.indexOutput()
+                rob1.indexCalc()
 
             except:
                 #pass
