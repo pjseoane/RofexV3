@@ -32,4 +32,5 @@ class cAlgoBase:
             m = 0
         return m
 
+
 # faltan definir las otras funciones para obtener mas data del dictionary

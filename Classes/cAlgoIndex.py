@@ -17,9 +17,9 @@ class cAlgoIndex(alg.cAlgoBase):
         self.midMarket=0
 
     def indexOutput(self):
-        print ("En cGoRobotIndex")
+        # print ("En cGoRobotIndex")
         for sym in self.symbols:
-            print ("ticker from cAlgoIndex: ",sym)
+            # print ("ticker from cAlgoIndex: ",sym)
             print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym),
                    "/", self.getOfferSize(sym))
 
