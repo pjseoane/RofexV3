@@ -64,7 +64,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
                 # Arma y carga el Dictionary
                 self.sym = msg['instrumentId']['symbol']
                 self.marketDataDict[self.sym] = msg
-                #rint("Antes de goRobot()")
+
                 self.goRobot()
 
             elif msgType == 'OR':
@@ -92,48 +92,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
     def buildMessage(self):
         return "{\"type\":\"" + self.type_ + "\",\"level\":" + self.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.marketId_ + "\"}]}"
 
-    def getContractLowLimit(self, ticker):
-        return self.contractDetail[ticker]['instrument']['lowLimitPrice']
 
-    def getContractHighLimit(self, ticker):
-        return self.contractDetail[ticker]['instrument']['highLimitPrice']
-
-    def getContractMinPriceIncrement(self, ticker):
-        return self.contractDetail[ticker]['instrument']['minPriceIncrement']
-
-    def getContractMultiplier(self, ticker):
-        return self.contractDetail[ticker]['instrument']['contractMultiplier']
-
-    def getMaturityDate(self, ticker):
-        return self.contractDetail[ticker]['instrument']['maturityDate']
-
-    def getBidPrice(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
-        except:
-            m = 0
-        return m
-
-    def getBidSize(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
-        except:
-            m = 0
-        return m
-
-    def getOfferPrice(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
-        except:
-            m = 0
-        return m
-
-    def getOfferSize(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
-        except:
-            m = 0
-        return m
 
     def goRobot(self):
         # Overridable Method

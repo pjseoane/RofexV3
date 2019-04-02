@@ -1,32 +1,35 @@
-from Classes import cGetMarketData as md
+from Robots import zRobot as zR
 
 
-class cFutureIndex(md.cGetMarketData):
+class indexUSD(zR.zRobot):
 
     def __init__(self, symbols, myIndexBidPrice, myIndexOfferPrice):
+
         super().__init__(symbols)
 
-        self.indexBidUSD = 0
-        self.indexOfferUSD = 0
+        self.indexBidUSD = False
+        self.indexOfferUSD = False
         self.indexBidSizeUSD = 0
         self.indexOfferSizeUSD = 0
-        self.availableBid = 0
-        self.availableOffer = 0
-        self.midMarket = 0
+        self.availableBid = False
+        self.availableOffer = False
+        self.midMarket = False
         self.myIndexBidPrice = myIndexBidPrice
         self.myIndexOfferPrice = myIndexOfferPrice
-
-        self.usdBidPrice = 0
+        #
+        self.usdBidPrice = False
         self.usdBidSize = 0
-        self.usdOfferPrice = 0
+        self.usdOfferPrice = False
         self.usdOfferSize = 0
 
-        self.indexBidPrice = 0
+        self.indexBidPrice = False
         self.indexBidSize = 0
-        self.indexOfferPrice = 0
+        self.indexOfferPrice = False
         self.indexOfferSize = 0
-        
+
     def goRobot(self):
+        print("En goRobot indexUSD")
+        self.mdOutput()
         self.usdBidPrice = self.getBidPrice(self.symbols[0])
         self.usdBidSize = self.getBidSize(self.symbols[0])
         self.usdOfferPrice = self.getOfferPrice(self.symbols[0])
@@ -36,34 +39,20 @@ class cFutureIndex(md.cGetMarketData):
         self.indexBidSize = self.getBidSize(self.symbols[1])
         self.indexOfferPrice = self.getOfferPrice(self.symbols[1])
         self.indexOfferSize = self.getOfferSize(self.symbols[1])
-        # print("En goRobot cBasicRobot:")
         # Chequer si el dictionary ya tiene tantos datos como symbols
 
         if self.marketDataDict.__len__() == len(self.symbols):
-
-            try:
-                self.indexOutput()
-                self.indexCalc()
-                self.tradeIntelligence()
-
-            except:
-                # pass
-                print("Error goRobot()")
+            self.indexCalc()
+            self.tradeIntelligence()
+        #
         else:
-            print ("Dictionary not completed yet....")
-
-    def indexOutput(self):
-        # print ("En cBasicRobot")
-        for sym in self.symbols:
-
-            print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym),
-                  "/", self.getOfferSize(sym))
+            print(" indexUSD Dictionary not completed yet....")
 
     def indexCalc(self):
-        usd = self.symbols[0]
-        index = self.symbols[1]
-        # symbols[1] = Index
-
+        # # usd = self.symbols[0]
+        # # index = self.symbols[1]
+        # # # symbols[1] = Index
+        #
         if self.usdOfferPrice != 0:
             self.indexBidUSD = self.indexBidPrice / self.usdOfferPrice
 
@@ -71,30 +60,30 @@ class cFutureIndex(md.cGetMarketData):
             self.indexOfferUSD = self.indexOfferPrice / self.usdBidPrice
 
         if self.usdOfferPrice != 0 and self.indexBidPrice != 0:
-            self.availableBid = round(
-                min(self.indexBidPrice * self.indexBidSize / self.usdOfferPrice / 1000,
-                    self.usdOfferPrice * self.usdOfferSize * 1000 / self.indexBidPrice), 2)
+            self.availableBid = round(min(self.indexBidPrice * self.indexBidSize / self.usdOfferPrice / 1000,
+                                          self.usdOfferPrice * self.usdOfferSize * 1000 / self.indexBidPrice), 2)
 
         if self.usdBidPrice != 0 and self.indexOfferPrice != 0:
-            self.availableOffer = round(
-                min(self.indexOfferPrice * self.indexOfferSize / self.usdBidPrice / 1000,
-                    self.usdBidPrice * self.usdBidSize * 1000 / self.indexOfferPrice), 2)
+            self.availableOffer = round(min(self.indexOfferPrice * self.indexOfferSize / self.usdBidPrice / 1000,
+                                            self.usdBidPrice * self.usdBidSize * 1000 / self.indexOfferPrice), 2)
 
         self.midMarket = (self.indexBidUSD + self.indexOfferUSD) / 2
 
-        print("Index in USD: ", self.indexBidUSD, "/", self.indexOfferUSD, "size :", self.availableBid, "x",
-              self.availableOffer, "----->", str(round(self.midMarket * 0.995, 2)), "/",
+        print("Index in USD: ", self.indexBidUSD, "/", self.indexOfferUSD, "size :",
+              self.availableBid, "x",
+              self.availableOffer, "----->",
+              str(round(self.midMarket * 0.995, 2)), "/",
               str(round(self.midMarket * 1.005, 2)), " SIZE:----> ", str(round(self.availableBid, 0)), "xx",
               str(round(self.availableOffer, 0)))
 
     def tradeIntelligence(self):
-        print("Entrando a Trade Int")
-        self.availableOffer=int(round(self.availableOffer, 0))
+        # print("Entrando a Trade Int")
+        self.availableOffer = int(round(self.availableOffer, 0))
         self.availableBid = int(round(self.availableBid, 0))
 
         if self.myIndexBidPrice > self.indexOfferUSD > 0:
             print("Buy indice en USD")
-            usdContracts = int(round(self.indexOfferPrice*self.availableOffer/ (self.usdBidPrice*1000),0))
+            usdContracts = int(round(self.indexOfferPrice*self.availableOffer/ (self.usdBidPrice*1000), 0))
 
             self.buyIndexUSD(self.symbols[0], self.symbols[1], self.usdBidPrice, self.indexOfferPrice, usdContracts,
                              self.availableOffer)
@@ -128,8 +117,9 @@ if __name__ == '__main__':
     myBid   =950
     myOffer =964
     suscriptTuple = (ticker1, ticker2)
-    suscription = cFutureIndex(suscriptTuple, myBid, myOffer)
+    suscription = indexUSD(suscriptTuple, myBid, myOffer)
     suscription.start()
 
 else:
     pass
+
