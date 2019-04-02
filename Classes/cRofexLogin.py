@@ -140,4 +140,5 @@ if __name__ == '__main__':
     print("Instrumentos :",user1.instrumentos())
     print("Instruments DetailsAll:",user1.instrumentsDetailsAll())
 else:
-    print("Nombre de Clase/else:", __name__)
+    pass
+    #print("Nombre de Clase/else:", __name__)
