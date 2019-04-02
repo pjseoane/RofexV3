@@ -152,5 +152,6 @@ if __name__ == '__main__':
     suscrip = cGetMarketData(suscriptTuple)
     suscrip.start()
 
+
 else:
     pass
