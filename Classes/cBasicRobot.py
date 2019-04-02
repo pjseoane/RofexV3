@@ -94,14 +94,14 @@ class cFutureIndex(md.cGetMarketData):
 
         if self.myIndexBidPrice > self.indexOfferUSD > 0:
             print("Buy indice en USD")
-            usdContracts = int(round(self.indexOfferPrice*self.availableOffer/1000,0))
+            usdContracts = int(round(self.indexOfferPrice*self.availableOffer/ (self.usdBidPrice*1000),0))
 
             self.buyIndexUSD(self.symbols[0], self.symbols[1], self.usdBidPrice, self.indexOfferPrice, usdContracts,
                              self.availableOffer)
 
         if self.indexBidUSD > self.myIndexOfferPrice and self.indexBidUSD > 0:
             print("Sell indice en USD")
-            usdContracts = int(round(self.indexBidPrice * self.availableBid / 1000,0))
+            usdContracts = int(round(self.indexBidPrice * self.availableBid / (self.usdOfferPrice*1000), 0))
             self.sellIndexUSD(self.symbols[0], self.symbols[1], self.usdOfferPrice, self.indexBidPrice, usdContracts,
                               self.availableBid)
 
