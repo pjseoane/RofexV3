@@ -140,19 +140,6 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
     def goRobot(self):
         # Overridable Method
         pass
-        # # print("marketDataDict: ", self.marketDataDict)
-        # # Chequer si el dictionary ya tiene tantos datos como symbols
-        # if self.marketDataDict.__len__() == len(self.symbols):
-        #
-        #     try:
-        #
-        #         rob1 = cAlgoIndex.cAlgoIndex(self.marketDataDict, self.symbols)
-        #         rob1.indexOutput()
-        #         rob1.indexCalc()
-        #
-        #     except:
-        #         #pass
-        #         print("Error goRobot()")
 
 
 if __name__ == '__main__':
@@ -162,8 +149,8 @@ if __name__ == '__main__':
     ticker2 = "RFX20Jun19"
     suscriptTuple = (ticker1, ticker2)
     # print(newUser.instrumentDetail(ticker1, 'ROFX'))
-    suscription1 = cGetMarketData(suscriptTuple)
-
+    suscrip = cGetMarketData(suscriptTuple)
+    suscrip.start()
 
 else:
     pass
