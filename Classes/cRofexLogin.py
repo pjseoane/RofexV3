@@ -2,7 +2,7 @@ import requests
 import simplejson
 
 
-class cSetUpEnvironment():
+class cSetUpEnvironment:
 
     endpointDemo = "http://pbcp-remarket.cloud.primary.com.ar/"
     wsEndpointDemo = "ws://pbcp-remarket.cloud.primary.com.ar/"
