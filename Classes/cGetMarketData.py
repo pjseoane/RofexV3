@@ -17,7 +17,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         self.numMessages = 0
         self.marketDataDict = {}
         self.contractDetail = {}
-        #self.runWS()
+    #    self.runWS()
 
     def start(self):
         self.runWS()
@@ -45,14 +45,12 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             self.suscribeTickers()
 
     def suscribeTickers(self):
-        # overridable method
-        #pass
         for self.sym in self.symbols:
 
             # Arma diccionario de detalles contratos para este Algo
             self.contractDetail[self.sym] = self.instrumentDetail(self.sym, 'ROFX')
             self.ws.send(self.buildMessage)
-            print("Sent Suscription msg for ", self.sym)
+            print("(cGetMarketData) Sent Suscription msg for ", self.sym)
             sleep(1)
 
     def on_message(self, message):
@@ -66,7 +64,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
                 # Arma y carga el Dictionary
                 self.sym = msg['instrumentId']['symbol']
                 self.marketDataDict[self.sym] = msg
-
+                #rint("Antes de goRobot()")
                 self.goRobot()
 
             elif msgType == 'OR':
@@ -76,7 +74,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
                 print("Tipo de Mensaje Recibido No soportado: ", msg)
 
         except:
-            print("Error al procesar mensaje recibido:--->>> ", msg)
+            print("Error al procesar mensaje recibido:--->>> ", message)
 
     def on_error(self, error):
         print("Salio por error: ", error)
@@ -139,6 +137,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
     def goRobot(self):
         # Overridable Method
+        #print("En goRobot de cGetMarketData...")
         pass
 
 

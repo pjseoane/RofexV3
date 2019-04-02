@@ -22,6 +22,7 @@ class cSetUpEnvironment:
         self.token = ""
         self.url = ""
         self.s = requests.Session()
+        self.loginSuccess = False
         self.login()
 
     def login(self):
@@ -32,7 +33,7 @@ class cSetUpEnvironment:
 
         if loginResponse.ok:
             self.token = loginResponse.headers['X-Auth-Token']
-            # self.loginSuccess = True
+            self.loginSuccess = True
             print("login() OK --->", self.token)
         else:
             print("Request Error.", __name__)
@@ -59,6 +60,9 @@ class cSetUpEnvironment:
     def newSingleOrder(self, marketId, symbol, price, orderQty, ordType, side, timeInForce, account, cancelPrevious):
         self.url = self.activeEndpoint + "rest/order/newSingleOrder?marketId=" + marketId + "&symbol=" + symbol + "&price=" + price + "&orderQty=" + orderQty + "&ordType=" + ordType + "&side=" + side + "&timeInForce=" + timeInForce + "&account=" + account + "&cancelPrevious=" + cancelPrevious
         return self.retReq()
+
+    def singleTrade(self, side, ticker, price, cant):
+        self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "TRUE")
 
     def listaSegmentosDisp(self):
         self.url = self.activeEndpoint + "rest/segment/all"
@@ -135,10 +139,13 @@ class cSetUpEnvironment:
 if __name__ == '__main__':
     print("En main")
     user1 = cSetUpEnvironment()
-    #user1 = cSetUpEnvironment("pjseoane232", "AiZkiC5#","REM232")
     print(user1.activeWSEndpoint)
-    print("Instrumentos :",user1.instrumentos())
-    print("Instruments DetailsAll:",user1.instrumentsDetailsAll())
+    # print("Instrumentos :",user1.instrumentos())
+    # print("Instruments DetailsAll:",user1.instrumentsDetailsAll())
+    try:
+        user1.singleTrade("SELL", "RFX20Jun19","46230", "9")
+    except:
+        print("Salio x error")
 else:
     pass
     #print("Nombre de Clase/else:", __name__)
