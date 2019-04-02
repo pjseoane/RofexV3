@@ -50,7 +50,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             # Arma diccionario de detalles contratos para este Algo
             self.contractDetail[self.sym] = self.instrumentDetail(self.sym, 'ROFX')
             self.ws.send(self.buildMessage)
-            print("(cGetMarketData) Sent Suscription msg for ", self.sym)
+            print("(cGetMarketData) Sent Suscription msg for: ", self.sym)
             sleep(1)
 
     def on_message(self, message):
@@ -92,21 +92,16 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
     def buildMessage(self):
         return "{\"type\":\"" + self.type_ + "\",\"level\":" + self.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.marketId_ + "\"}]}"
 
-
-
     def goRobot(self):
         # Overridable Method
-        #print("En goRobot de cGetMarketData...")
         pass
 
 
 if __name__ == '__main__':
-    #newUser = cRofexLogin.cSetUpEnvironment()
 
     ticker1 = "DOJun19"
     ticker2 = "RFX20Jun19"
     suscriptTuple = (ticker1, ticker2)
-    # print(newUser.instrumentDetail(ticker1, 'ROFX'))
     suscrip = cGetMarketData(suscriptTuple)
     suscrip.start()
 
