@@ -3,6 +3,9 @@ from Robots import zRobot as zR
 
 class indexUSD(zR.zRobot):
 
+    USDPosition: int
+    factor:float
+
     def __init__(self, symbols, myIndexBidPrice, myIndexOfferPrice):
 
         super().__init__(symbols)
@@ -26,7 +29,8 @@ class indexUSD(zR.zRobot):
         self.indexBidSize = 0
         self.indexOfferPrice = False
         self.indexOfferSize = 0
-
+        self.indexPosition=0
+        self.USDPosition=0
 
     def goRobot(self):
         print("En goRobot indexUSD")
@@ -76,7 +80,7 @@ class indexUSD(zR.zRobot):
               self.availableOffer, "----->",
               str(round(self.midMarket * 0.995, 2)), "/",
               str(round(self.midMarket * 1.005, 2)), " SIZE:----> ", str(round(self.availableBid, 0)), "xx",
-              str(round(self.availableOffer, 0)), "Trades: ",self.trades)
+              str(round(self.availableOffer, 0)), "Trades: ",self.trades, "Index: ",self.indexPosition, "USD :",self.USDPosition)
 
     def tradeIntelligence(self):
         # print("Entrando a Trade Int")
@@ -91,7 +95,7 @@ class indexUSD(zR.zRobot):
             self.buyIndexUSD(self.symbols[0], self.symbols[1], self.usdBidPrice, self.indexOfferPrice, usdContracts,
                              self.availableOffer)
 
-            self.myIndexBidPrice=self.decreaseBidPrice(0.997)
+            self.myIndexBidPrice=self.decreaseBidPrice(float('0.997'))
             # self.myIndexBidPrice *= 0.997
 
 
@@ -116,6 +120,9 @@ class indexUSD(zR.zRobot):
         # print("Before ex buyIndexUSD",tickerIndex,indexPrice,indexContracts)
         self.singleTrade('BUY', tickerIndex, str(indexPrice), str(indexContracts))
         self.singleTrade('SELL', tickerUSD, str(usdPrice), str(usdContracts))
+        self.indexPosition+=1
+        self.USDPosition-=1
+        
 
         print("Buying INDEX: ", "Price / Contracts:", str(indexPrice), str(indexContracts))
         print("Selling USD : ", "Price / Contracts:", str(usdPrice), str(usdContracts))
@@ -124,6 +131,9 @@ class indexUSD(zR.zRobot):
         # Sell Index + Buy USD
         self.singleTrade("SELL", tickerIndex, str(int(indexPrice)), str(int(indexContracts)))
         self.singleTrade("BUY", tickerUSD, str(int(usdPrice)), str(int(usdContracts)))
+        self.indexPosition -= 1
+        self.USDPosition += 1
+        
         print("Selling INDEX: ", "Price / Contracts:", indexPrice, indexContracts)
         print("Buying  USD : ", "Price / Contracts:", usdPrice, usdContracts)
 
@@ -132,8 +142,8 @@ if __name__ == '__main__':
 
     ticker1 = "DOJun19"
     ticker2 = "RFX20Jun19"
-    myBid   =942
-    myOffer =955
+    myBid   =900
+    myOffer =915
     suscriptTuple = (ticker1, ticker2)
     suscription = indexUSD(suscriptTuple, myBid, myOffer)
     suscription.start()
