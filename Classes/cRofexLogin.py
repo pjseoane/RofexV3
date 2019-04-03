@@ -4,6 +4,7 @@ import simplejson
 
 class cSetUpEnvironment:
 
+    trades: int
     endpointDemo = "http://pbcp-remarket.cloud.primary.com.ar/"
     wsEndpointDemo = "ws://pbcp-remarket.cloud.primary.com.ar/"
     activeEndpoint = endpointDemo
@@ -23,6 +24,7 @@ class cSetUpEnvironment:
         self.url = ""
         self.s = requests.Session()
         self.loginSuccess = False
+        self.trades=0
         self.login()
 
     def login(self):
@@ -59,6 +61,7 @@ class cSetUpEnvironment:
 
     def newSingleOrder(self, marketId, symbol, price, orderQty, ordType, side, timeInForce, account, cancelPrevious):
         self.url = self.activeEndpoint + "rest/order/newSingleOrder?marketId=" + marketId + "&symbol=" + symbol + "&price=" + price + "&orderQty=" + orderQty + "&ordType=" + ordType + "&side=" + side + "&timeInForce=" + timeInForce + "&account=" + account + "&cancelPrevious=" + cancelPrevious
+        self.trades+=1
         return self.retReq()
 
     def singleTrade(self, side, ticker, price, cant):

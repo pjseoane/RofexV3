@@ -27,6 +27,7 @@ class indexUSD(zR.zRobot):
         self.indexOfferPrice = False
         self.indexOfferSize = 0
 
+
     def goRobot(self):
         print("En goRobot indexUSD")
         self.mdOutput()
@@ -44,7 +45,8 @@ class indexUSD(zR.zRobot):
         if self.marketDataDict.__len__() == len(self.symbols):
             self.indexCalc()
             self.tradeIntelligence()
-        #
+
+        #TODO: Desarrollar un BookStatus method, ver limites, balancear etc
         else:
             print(" indexUSD Dictionary not completed yet....")
 
@@ -74,7 +76,7 @@ class indexUSD(zR.zRobot):
               self.availableOffer, "----->",
               str(round(self.midMarket * 0.995, 2)), "/",
               str(round(self.midMarket * 1.005, 2)), " SIZE:----> ", str(round(self.availableBid, 0)), "xx",
-              str(round(self.availableOffer, 0)))
+              str(round(self.availableOffer, 0)), "Trades: ",self.trades)
 
     def tradeIntelligence(self):
         # print("Entrando a Trade Int")
@@ -85,6 +87,7 @@ class indexUSD(zR.zRobot):
             print("Buy indice en USD")
             usdContracts = int(round(self.indexOfferPrice*self.availableOffer/ (self.usdBidPrice*1000), 0))
 
+            # TODO mandar ordenes de 1 contrato nada mas
             self.buyIndexUSD(self.symbols[0], self.symbols[1], self.usdBidPrice, self.indexOfferPrice, usdContracts,
                              self.availableOffer)
 
@@ -113,6 +116,7 @@ class indexUSD(zR.zRobot):
         # print("Before ex buyIndexUSD",tickerIndex,indexPrice,indexContracts)
         self.singleTrade('BUY', tickerIndex, str(indexPrice), str(indexContracts))
         self.singleTrade('SELL', tickerUSD, str(usdPrice), str(usdContracts))
+
         print("Buying INDEX: ", "Price / Contracts:", str(indexPrice), str(indexContracts))
         print("Selling USD : ", "Price / Contracts:", str(usdPrice), str(usdContracts))
 
