@@ -4,7 +4,7 @@ from Robots import zRobot as zR
 class indexUSD(zR.zRobot):
 
     USDPosition: int
-    factor:float
+    # factor:float
 
     def __init__(self, symbols, myIndexBidPrice, myIndexOfferPrice):
 
@@ -31,9 +31,11 @@ class indexUSD(zR.zRobot):
         self.indexOfferSize = 0
         self.indexPosition=0
         self.USDPosition=0
+        self.sumIndexValue=0
+        self.sumUSDValue=0
 
     def goRobot(self):
-        print("En goRobot indexUSD")
+        # print("En goRobot indexUSD")
         self.mdOutput()
         self.usdBidPrice = self.getBidPrice(self.symbols[0])
         self.usdBidSize = self.getBidSize(self.symbols[0])
@@ -48,7 +50,9 @@ class indexUSD(zR.zRobot):
 
         if self.marketDataDict.__len__() == len(self.symbols):
             self.indexCalc()
+            self.printLineIndexUSD()
             self.tradeIntelligence()
+            self.printBook()
 
         #TODO: Desarrollar un BookStatus method, ver limites, balancear etc
         else:
@@ -75,15 +79,27 @@ class indexUSD(zR.zRobot):
 
         self.midMarket = (self.indexBidUSD + self.indexOfferUSD) / 2
 
-        print("Index in USD: ","(", self.myIndexBidPrice,"/",self.myIndexOfferPrice,")", self.indexBidUSD, "/", self.indexOfferUSD, "size :",
-              self.availableBid, "x",
-              self.availableOffer, "----->",
+    def printLineIndexUSD(self):
+        print("Index in USD: ", "(",
+              round(self.myIndexBidPrice, 2), "/",
+              round(self.myIndexOfferPrice,2), ")",
+              round(self.indexBidUSD,2), "/",
+              round(self.indexOfferUSD,2), "size :",
+              self.availableBid, "x", self.availableOffer, "----->",
               str(round(self.midMarket * 0.995, 2)), "/",
-              str(round(self.midMarket * 1.005, 2)), " SIZE:----> ", str(round(self.availableBid, 0)), "xx",
-              str(round(self.availableOffer, 0)), "Trades: ",self.trades, "Index: ",self.indexPosition, "USD :",self.USDPosition)
+              str(round(self.midMarket * 1.005, 2)), " SIZE:----> ",
+              str(round(self.availableBid, 0)), "xx",
+              str(round(self.availableOffer, 0)))
+
+    def printBook(self):
+        print("Book-Total trades: ", self.trades,
+              "  Index Pos: ", self.indexPosition, ":", round(self.sumIndexValue, 2),
+              "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue,2))
 
     def tradeIntelligence(self):
         # print("Entrando a Trade Int")
+
+        # Opera de a 1 contrato, sino
         self.availableOffer = int(round(self.availableOffer, 0))
         self.availableBid = int(round(self.availableBid, 0))
 
@@ -95,9 +111,8 @@ class indexUSD(zR.zRobot):
             self.buyIndexUSD(self.symbols[0], self.symbols[1], self.usdBidPrice, self.indexOfferPrice, usdContracts,
                              self.availableOffer)
 
-            self.myIndexBidPrice=self.decreaseBidPrice(float('0.997'))
+            self.myIndexBidPrice=self.decreaseBidPrice(0.997)
             # self.myIndexBidPrice *= 0.997
-
 
         if self.indexBidUSD > self.myIndexOfferPrice and self.indexBidUSD > 0:
             print("Sell indice en USD")
@@ -109,20 +124,25 @@ class indexUSD(zR.zRobot):
 
     def decreaseBidPrice(self, factor):
         self.myIndexBidPrice *= factor
-        print("My Index Bid Price", self.myIndexBidPrice)
+        return self.myIndexBidPrice
 
-    def increaseOfferPrice(self,factor):
-        self.myIndexOfferPrice*= factor
+    def increaseOfferPrice(self, factor):
+        """
 
+        :type factor: float
+        """
+        self.myIndexOfferPrice *= factor
+        return self.myIndexOfferPrice
 
     def buyIndexUSD(self, tickerUSD, tickerIndex, usdPrice, indexPrice, usdContracts, indexContracts):
         # Buy Index + Sell USD
         # print("Before ex buyIndexUSD",tickerIndex,indexPrice,indexContracts)
         self.singleTrade('BUY', tickerIndex, str(indexPrice), str(indexContracts))
         self.singleTrade('SELL', tickerUSD, str(usdPrice), str(usdContracts))
-        self.indexPosition+=1
-        self.USDPosition-=1
-        
+        self.indexPosition += indexContracts
+        self.USDPosition -= usdContracts
+        self.sumIndexValue += indexPrice * indexContracts
+        self.sumUSDValue -= usdPrice * usdContracts *1000
 
         print("Buying INDEX: ", "Price / Contracts:", str(indexPrice), str(indexContracts))
         print("Selling USD : ", "Price / Contracts:", str(usdPrice), str(usdContracts))
@@ -131,11 +151,14 @@ class indexUSD(zR.zRobot):
         # Sell Index + Buy USD
         self.singleTrade("SELL", tickerIndex, str(int(indexPrice)), str(int(indexContracts)))
         self.singleTrade("BUY", tickerUSD, str(int(usdPrice)), str(int(usdContracts)))
-        self.indexPosition -= 1
-        self.USDPosition += 1
-        
-        print("Selling INDEX: ", "Price / Contracts:", indexPrice, indexContracts)
-        print("Buying  USD : ", "Price / Contracts:", usdPrice, usdContracts)
+        self.indexPosition -= indexContracts
+        self.USDPosition += usdContracts
+        self.sumIndexValue -= indexPrice * indexContracts
+        self.sumUSDValue += usdPrice * usdContracts * 1000
+
+        print(".....Selling INDEX: ", indexPrice, "vol:", indexContracts,
+              "Buying USD: ", usdPrice, "vol ", usdContracts,)
+        #print("Buying  USD : ", "Price / Contracts:", usdPrice, usdContracts)
 
 
 if __name__ == '__main__':

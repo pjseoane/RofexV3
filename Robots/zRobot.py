@@ -18,7 +18,7 @@ class zRobot (md.cGetMarketData):
         if self.marketDataDict.__len__() == len(self.symbols):
             print("Dictionary completed")
             for sym in self.symbols:
-                print(sym, "    ", self.getBidPrice(sym), "/", self.getOfferPrice(sym), "----------", self.getBidSize(sym),
+                print(sym, "    ", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym),2), "----------", self.getBidSize(sym),
                   "/", self.getOfferSize(sym))
         else:
             print("Dictionary not completed yet....")
