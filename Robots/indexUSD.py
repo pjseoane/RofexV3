@@ -53,7 +53,7 @@ class indexUSD(zR.zRobot):
             self.printLineIndexUSD()
             self.tradeIntelligence()
             self.printBook()
-            self.printFullMD()
+            # self.printFullMD()
 
         #TODO: Desarrollar un BookStatus method, ver limites, balancear etc
         else:

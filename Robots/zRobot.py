@@ -27,6 +27,9 @@ class zRobot (md.cGetMarketData):
         else:
             print("Dictionary not completed yet....")
 
+    def getFullMD(self, ticker, depth):
+        return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
+
     def getContractLowLimit(self, ticker):
         return self.contractDetail[ticker]['instrument']['lowLimitPrice']
 

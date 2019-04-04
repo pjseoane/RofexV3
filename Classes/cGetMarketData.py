@@ -58,6 +58,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
         try:
             msg = simplejson.loads(message)
+            print("New msg->: ",msg)
             msgType = msg['type'].upper()
 
             if msgType == 'MD':
@@ -90,14 +91,10 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
     @property
     def buildMessage(self):
+        # 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI'
         return "{\"type\":\"" + self.type_ + "\",\"level\":" + self.level_ +\
-               ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" +\
+               ", \"entries\":[\"BI\", \"OF\",\"LA\"],\"products\":[{\"symbol\":\"" +\
                self.sym + "\",\"marketId\":\"" + self.marketId_ + "\"}]}"
-
-    def getFullMD(self, ticker, depth):
-        return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
-
-
 
     def goRobot(self):
         # Overridable Method
