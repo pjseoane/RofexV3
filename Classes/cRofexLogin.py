@@ -126,7 +126,8 @@ class cSetUpEnvironment:
         self.url = self.activeEndpoint + "rest/order/byExecId?execId=" + execId
         return self.retReq()
 
-    def getMarketData(self,marketId, symbol, p1, p2, p3, p4, p5, p6, p7, depth):
+    def getMarketData(self, marketId: str, symbol: str, p1: object, p2: object, p3: object, p4: object, p5: object, p6: object, p7: object, depth: object) -> object:
+        # parameters p1...p7 :"BI","OF","LA","OP","CL","SE","OI"
         self.url = self.activeEndpoint + "rest/marketdata/get?marketId=" + marketId + "&symbol=" + symbol + "&entries=" + p1 + "," + p2 + "," + p3 + "," + p4 + "," + p5 + "," + p6 + "," + p7 + "&depth=" + depth
         return self.retReq()
 

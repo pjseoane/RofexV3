@@ -90,7 +90,14 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
     @property
     def buildMessage(self):
-        return "{\"type\":\"" + self.type_ + "\",\"level\":" + self.level_ + ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" + self.sym + "\",\"marketId\":\"" + self.marketId_ + "\"}]}"
+        return "{\"type\":\"" + self.type_ + "\",\"level\":" + self.level_ +\
+               ", \"entries\":[\"BI\", \"OF\"],\"products\":[{\"symbol\":\"" +\
+               self.sym + "\",\"marketId\":\"" + self.marketId_ + "\"}]}"
+
+    def getFullMD(self, ticker, depth):
+        return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
+
+
 
     def goRobot(self):
         # Overridable Method

@@ -53,10 +53,15 @@ class indexUSD(zR.zRobot):
             self.printLineIndexUSD()
             self.tradeIntelligence()
             self.printBook()
+            self.printFullMD()
 
         #TODO: Desarrollar un BookStatus method, ver limites, balancear etc
         else:
             print(" indexUSD Dictionary not completed yet....")
+
+    def printFullMD(self):
+        print(self.getFullMD(self.symbols[0], str(1)))
+        print(self.getFullMD(self.symbols[1], str(1)))
 
     def indexCalc(self):
         # # usd = self.symbols[0]
@@ -158,7 +163,6 @@ class indexUSD(zR.zRobot):
 
         print(".....Selling INDEX: ", indexPrice, "vol:", indexContracts,
               "Buying USD: ", usdPrice, "vol ", usdContracts,)
-        #print("Buying  USD : ", "Price / Contracts:", usdPrice, usdContracts)
 
 
 if __name__ == '__main__':

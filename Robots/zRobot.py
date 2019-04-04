@@ -20,6 +20,10 @@ class zRobot (md.cGetMarketData):
             for sym in self.symbols:
                 print(sym, "    ", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym),2), "----------", self.getBidSize(sym),
                   "/", self.getOfferSize(sym))
+
+
+
+
         else:
             print("Dictionary not completed yet....")
 
