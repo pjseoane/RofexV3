@@ -1,4 +1,4 @@
-from Robots import zRobot as zR
+from Robots import cZrobot as zR
 
 
 class indexUSD(zR.zRobot):
@@ -24,12 +24,15 @@ class indexUSD(zR.zRobot):
         self.usdBidSize = 0
         self.usdOfferPrice = False
         self.usdOfferSize = 0
+        self.usdLastPrice=0
 
         self.indexBidPrice = False
         self.indexBidSize = 0
         self.indexOfferPrice = False
         self.indexOfferSize = 0
         self.indexPosition=0
+        self.indexLastPrice=0
+
         self.USDPosition=0
         self.sumIndexValue=0
         self.sumUSDValue=0
@@ -169,8 +172,8 @@ if __name__ == '__main__':
 
     ticker1 = "DOJun19"
     ticker2 = "RFX20Jun19"
-    myBid   = 900
-    myOffer = 915
+    myBid   = 930
+    myOffer = 950
     suscriptTuple = (ticker1, ticker2)
     suscription = indexUSD(suscriptTuple, myBid, myOffer)
     suscription.start()

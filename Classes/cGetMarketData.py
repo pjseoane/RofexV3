@@ -17,6 +17,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         self.numMessages = 0
         self.marketDataDict = {}
         self.contractDetail = {}
+        self.marketCloseData = {}
     #    self.runWS()
 
     def start(self):
@@ -49,6 +50,9 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
             # Arma diccionario de detalles contratos para este Algo
             self.contractDetail[self.sym] = self.instrumentDetail(self.sym, 'ROFX')
+            # def getMarketData(self, marketId: str, symbol: str, p1: object, p2: object, p3: object, p4: object, p5: object, p6: object, p7: object, depth: object)
+            self.marketCloseData[self.sym]= self.getMarketData('ROFX', self.sym,"LA","CL","SE","OI","","","",str(1))
+
             self.ws.send(self.buildMessage)
             print("(cGetMarketData) Sent Suscription msg for: ", self.sym)
             sleep(1)
@@ -58,10 +62,10 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
         try:
             msg = simplejson.loads(message)
-            print("New msg->: ",msg)
             msgType = msg['type'].upper()
 
             if msgType == 'MD':
+                # print("cgetMarketData New msg MD->: ", msg)
                 # Arma y carga el Dictionary
                 self.sym = msg['instrumentId']['symbol']
                 self.marketDataDict[self.sym] = msg

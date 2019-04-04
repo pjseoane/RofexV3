@@ -10,6 +10,7 @@ class zRobot (md.cGetMarketData):
     def __init__(self, symbols):
         super().__init__(symbols)
 
+
     def goRobot(self): # Overridable method, cada robot implementa el suyo
         pass
 
@@ -20,7 +21,7 @@ class zRobot (md.cGetMarketData):
             for sym in self.symbols:
                 print(sym, "    ", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym),2), "----------", self.getBidSize(sym),
                   "/", self.getOfferSize(sym))
-
+                # print("Dictionary market close: ",self.marketCloseData [sym])
 
 
 
@@ -73,6 +74,12 @@ class zRobot (md.cGetMarketData):
             m = 0
         return m
 
+    def getLastPrice(self, ticker):
+        try:
+            m = self.marketCloseData[ticker]['marketData']['LA']['size']
+        except:
+            m = 0
+        return m
 
 if __name__ == '__main__':
 
