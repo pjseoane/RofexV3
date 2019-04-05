@@ -24,18 +24,18 @@ class indexUSD(zR.zRobot):
         self.usdBidSize = 0
         self.usdOfferPrice = False
         self.usdOfferSize = 0
-        self.usdLastPrice=0
+        self.usdLastPrice = 0
 
         self.indexBidPrice = False
         self.indexBidSize = 0
         self.indexOfferPrice = False
         self.indexOfferSize = 0
-        self.indexPosition=0
-        self.indexLastPrice=0
+        self.indexPosition = 0
+        self.indexLastPrice = 0
 
-        self.USDPosition=0
-        self.sumIndexValue=0
-        self.sumUSDValue=0
+        self.USDPosition = 0
+        self.sumIndexValue = 0
+        self.sumUSDValue = 0
 
     def goRobot(self):
         # print("En goRobot indexUSD")
@@ -67,7 +67,7 @@ class indexUSD(zR.zRobot):
         print(self.getFullMD(self.symbols[1], str(1)))
 
     def indexCalc(self):
-        # # usd = self.symbols[0]
+        # # usd = self.symbols[0]+
         # # index = self.symbols[1]
         # # # symbols[1] = Index
         #
@@ -102,7 +102,7 @@ class indexUSD(zR.zRobot):
     def printBook(self):
         print("Book-Total trades: ", self.trades,
               "  Index Pos: ", self.indexPosition, ":", round(self.sumIndexValue, 2),
-              "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue,2))
+              "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue, 2))
 
     def tradeIntelligence(self):
         # print("Entrando a Trade Int")
@@ -113,7 +113,7 @@ class indexUSD(zR.zRobot):
 
         if self.myIndexBidPrice > self.indexOfferUSD > 0:
             print("Buy indice en USD")
-            usdContracts = int(round(self.indexOfferPrice*self.availableOffer/ (self.usdBidPrice*1000), 0))
+            usdContracts = int(round(self.indexOfferPrice*self.availableOffer / (self.usdBidPrice*1000), 0))
 
             # TODO mandar ordenes de 1 contrato nada mas
             self.buyIndexUSD(self.symbols[0], self.symbols[1], self.usdBidPrice, self.indexOfferPrice, usdContracts,
@@ -150,7 +150,7 @@ class indexUSD(zR.zRobot):
         self.indexPosition += indexContracts
         self.USDPosition -= usdContracts
         self.sumIndexValue += indexPrice * indexContracts
-        self.sumUSDValue -= usdPrice * usdContracts *1000
+        self.sumUSDValue -= usdPrice * usdContracts * 1000
 
         print("Buying INDEX: ", "Price / Contracts:", str(indexPrice), str(indexContracts))
         print("Selling USD : ", "Price / Contracts:", str(usdPrice), str(usdContracts))

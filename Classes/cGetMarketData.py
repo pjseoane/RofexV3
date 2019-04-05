@@ -50,10 +50,11 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
             # Arma diccionario de detalles contratos para este Algo
             self.contractDetail[self.sym] = self.instrumentDetail(self.sym, 'ROFX')
-            # def getMarketData(self, marketId: str, symbol: str, p1: object, p2: object, p3: object, p4: object, p5: object, p6: object, p7: object, depth: object)
-            self.marketCloseData[self.sym]= self.getMarketData('ROFX', self.sym,"LA","CL","SE","OI","","","",str(1))
+            self.marketCloseData[self.sym] = self.getMarketData('ROFX', self.sym,
+                                                                "LA", "CL", "SE", "OI", "", "", "", str(1))
 
             self.ws.send(self.buildMessage)
+            # print("(cGetMarketData)", self.contractDetail[self.sym])
             print("(cGetMarketData) Sent Suscription msg for: ", self.sym)
             sleep(1)
 

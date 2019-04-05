@@ -10,7 +10,6 @@ class zRobot (md.cGetMarketData):
     def __init__(self, symbols):
         super().__init__(symbols)
 
-
     def goRobot(self): # Overridable method, cada robot implementa el suyo
         pass
 
@@ -19,17 +18,20 @@ class zRobot (md.cGetMarketData):
         if self.marketDataDict.__len__() == len(self.symbols):
             print("Dictionary completed")
             for sym in self.symbols:
-                print(sym, "    ", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym),2), "----------", self.getBidSize(sym),
-                  "/", self.getOfferSize(sym))
+                print(sym,
+                      "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
+                      "    Last :", round(self.getLastPrice(sym), 2),
+                      "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
                 # print("Dictionary market close: ",self.marketCloseData [sym])
-
-
 
         else:
             print("Dictionary not completed yet....")
 
     def getFullMD(self, ticker, depth):
         return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
+
+    def getContractMultiplier(self, ticker):
+        return self.contractDetail[ticker]['instrument']['contractMultiplier']
 
     def getContractLowLimit(self, ticker):
         return self.contractDetail[ticker]['instrument']['lowLimitPrice']
@@ -76,7 +78,7 @@ class zRobot (md.cGetMarketData):
 
     def getLastPrice(self, ticker):
         try:
-            m = self.marketCloseData[ticker]['marketData']['LA']['size']
+            m = self.marketCloseData[ticker]['marketData']['LA']['price']
         except:
             m = 0
         return m
