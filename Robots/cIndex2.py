@@ -28,10 +28,17 @@ class cIndex2(z2.zRobot):
         self.indexOfferUSD = self.myIndexOfferPrice
         self.availableBid = 0
         self.availableOffer = 0
+        self.indexPosition = 0
+        self.USDPosition = 0
+        self.sumIndexValue = 0
+        self.sumUSDValue = 0
 
     def goRobot(self):
         self.mdOutput()
         self.indexCalc()
+        self.printLineIndexUSD()
+        self.tradeIntelligence()
+        self.printBook()
 
     def indexCalc(self):
         if self.usdOfferPrice > 0:
@@ -69,6 +76,10 @@ class cIndex2(z2.zRobot):
               #   str(round(self.availableBid, 0)), "xx",
               #   str(round(self.availableOffer, 0)))
 
+    def printBook(self):
+        print("Book-Total trades: ", self.trades,
+              "  Index Pos: ", self.indexPosition, ":", round(self.sumIndexValue, 2),
+              "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue, 2))
 
 if __name__ == '__main__':
 
