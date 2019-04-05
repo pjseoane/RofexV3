@@ -64,8 +64,7 @@ class cSetUpEnvironment:
         self.trades+=1
         return self.retReq()
 
-    def singleTrade(self, side, ticker, price, cant):
-        self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "TRUE")
+
 
     def listaSegmentosDisp(self):
         self.url = self.activeEndpoint + "rest/segment/all"

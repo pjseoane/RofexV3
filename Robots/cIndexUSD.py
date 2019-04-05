@@ -36,6 +36,7 @@ class indexUSD(zR.zRobot):
         self.USDPosition = 0
         self.sumIndexValue = 0
         self.sumUSDValue = 0
+        self.openAvgPrice = 0
 
     def goRobot(self):
         # print("En goRobot indexUSD")
@@ -102,7 +103,8 @@ class indexUSD(zR.zRobot):
     def printBook(self):
         print("Book-Total trades: ", self.trades,
               "  Index Pos: ", self.indexPosition, ":", round(self.sumIndexValue, 2),
-              "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue, 2))
+              "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue, 2),
+              " Precio prom: ",round( self.openAvgPrice ,2))
 
     def tradeIntelligence(self):
         # print("Entrando a Trade Int")
@@ -130,8 +132,16 @@ class indexUSD(zR.zRobot):
 
             self.myIndexOfferPrice=self.increaseOfferPrice(1.003)
 
+
+
+
+    def openAVGprice(self):
+            return self.sumIndexValue/self.indexPosition/self.sumUSDValue*self.USDPosition*1000
+            # pass
+
     def decreaseBidPrice(self, factor):
         self.myIndexBidPrice *= factor
+        self.myIndexOfferPrice = self.openAvgPrice * 1.01
         return self.myIndexBidPrice
 
     def increaseOfferPrice(self, factor):
@@ -140,6 +150,7 @@ class indexUSD(zR.zRobot):
         :type factor: float
         """
         self.myIndexOfferPrice *= factor
+        self.myIndexBidPrice = self.openAvgPrice * 0.99
         return self.myIndexOfferPrice
 
     def buyIndexUSD(self, tickerUSD, tickerIndex, usdPrice, indexPrice, usdContracts, indexContracts):
@@ -151,6 +162,7 @@ class indexUSD(zR.zRobot):
         self.USDPosition -= usdContracts
         self.sumIndexValue += indexPrice * indexContracts
         self.sumUSDValue -= usdPrice * usdContracts * 1000
+        self.openAvgPrice = self.openAVGprice()
 
         print("Buying INDEX: ", "Price / Contracts:", str(indexPrice), str(indexContracts))
         print("Selling USD : ", "Price / Contracts:", str(usdPrice), str(usdContracts))
@@ -158,11 +170,12 @@ class indexUSD(zR.zRobot):
     def sellIndexUSD(self, tickerUSD, tickerIndex, usdPrice, indexPrice, usdContracts, indexContracts):
         # Sell Index + Buy USD
         self.singleTrade("SELL", tickerIndex, str(int(indexPrice)), str(int(indexContracts)))
-        self.singleTrade("BUY", tickerUSD, str(int(usdPrice)), str(int(usdContracts)))
+        self.singleTrade("BUY", tickerUSD, str(usdPrice), str(int(usdContracts)))
         self.indexPosition -= indexContracts
         self.USDPosition += usdContracts
         self.sumIndexValue -= indexPrice * indexContracts
         self.sumUSDValue += usdPrice * usdContracts * 1000
+        self.openAvgPrice = self.openAVGprice()
 
         print(".....Selling INDEX: ", indexPrice, "vol:", indexContracts,
               "Buying USD: ", usdPrice, "vol ", usdContracts,)

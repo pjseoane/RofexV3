@@ -27,6 +27,9 @@ class zRobot (md.cGetMarketData):
         else:
             print("Dictionary not completed yet....")
 
+    def singleTrade(self, side, ticker, price, cant):
+        self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "FALSE")
+
     def getFullMD(self, ticker, depth):
         return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
 
