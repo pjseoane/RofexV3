@@ -1,7 +1,7 @@
 # Robot Zero, basico solo suscribe una tupla de symbols y los displaya
 #Los demas heredan de este
 
-import json
+
 from Classes import cGetMarketData as md
 
 
@@ -51,9 +51,6 @@ class zRobot (md.cGetMarketData):
 
     def getContractMinPriceIncrement(self, ticker):
         return self.contractDetail[ticker]['instrument']['minPriceIncrement']
-
-    def getContractMultiplier(self, ticker):
-        return self.contractDetail[ticker]['instrument']['contractMultiplier']
 
     def getMaturityDate(self, ticker):
         return self.contractDetail[ticker]['instrument']['maturityDate']
