@@ -81,6 +81,7 @@ class cIndex2(z2.zRobot):
               "  Index Pos: ", self.indexPosition, ":", round(self.sumIndexValue, 2),
               "  USD Position :", self.USDPosition, ":", round(self.sumUSDValue, 2))
 
+
 if __name__ == '__main__':
 
     ticker1 = "DOJun19"

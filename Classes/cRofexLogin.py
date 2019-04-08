@@ -64,8 +64,6 @@ class cSetUpEnvironment:
         self.trades+=1
         return self.retReq()
 
-
-
     def listaSegmentosDisp(self):
         self.url = self.activeEndpoint + "rest/segment/all"
         return self.retReq()
@@ -105,19 +103,19 @@ class cSetUpEnvironment:
         self.url = self.activeEndpoint + "rest/order/allById?clOrdId=" + clOrdId + "&proprietary=" + proprietary
         return self.retReq()
 
-    def consultarOrden(self,orderId):
+    def consultarOrden(self, orderId):
         self.url = self.activeEndpoint + "rest/order/byOrderId?orderId=" + orderId
         return self.retReq()
 
-    def consultarOrdenesActivas(self,accountId):
+    def getOrdenesOpen(self, accountId):
         self.url = self.activeEndpoint + "rest/order/actives?accountId=" + accountId
         return self.retReq()
 
-    def consultarOrdenesOperadas(self,accountId):
+    def getOrdenesFilled(self, accountId):
         self.url = self.activeEndpoint + "rest/order/filleds?accountId=" + accountId
         return self.retReq()
 
-    def consultarOrdenesAllClientOrder(self,accountId):
+    def getOrdenesAll(self, accountId):
         self.url = self.activeEndpoint + "rest/order/all?accountId=" + accountId
         return self.retReq()
 
