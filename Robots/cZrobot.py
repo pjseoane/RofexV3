@@ -19,11 +19,10 @@ class zRobot (md.cGetMarketData):
     #     ordersFilled=self.getOrdenesFilled(self.accountId)
     #     for
 
-
     def mdOutput(self):
         # print ("En zRobot")
         if self.marketDataDict.__len__() == len(self.symbols):
-            print("Dictionary completed")
+            # print("Dictionary completed")
             for sym in self.symbols:
                 print(sym,
                       "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
@@ -147,11 +146,6 @@ if __name__ == '__main__':
     print("Order Book Filled:", suscription.getOrdenesFilled(suscription.account))
     # print("Filled Orders function", suscription.getFilledOrders(ticker1))
     print("Open Contracts / Value", suscription.getSUMContractsOpenOrders(ticker1), suscription.getSUMValueOpenOrders(ticker1))
-
-
-
-
-
-    # msg = simplejson.loads(message)
+# msg = simplejson.loads(message)
 else:
     pass

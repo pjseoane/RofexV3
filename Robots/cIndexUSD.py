@@ -185,8 +185,8 @@ if __name__ == '__main__':
 
     ticker1 = "DOJun19"
     ticker2 = "RFX20Jun19"
-    myBid   = 930
-    myOffer = 950
+    myBid   = 925
+    myOffer = 935
     suscriptTuple = (ticker1, ticker2)
     suscription = indexUSD(suscriptTuple, myBid, myOffer)
     suscription.start()
