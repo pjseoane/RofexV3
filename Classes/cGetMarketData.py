@@ -18,10 +18,10 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         self.marketDataDict = {}
         self.contractDetail = {}
         self.marketCloseData = {}
-        self.runWS()
+        # self.runWS()
 
-    # def start(self):
-    #     self.runWS()
+    def start(self):
+         self.runWS()
 
     def runWS(self):
         headers = {'X-Auth-Token:{token}'.format(token=self.token)}
@@ -72,7 +72,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
                 self.marketDataDict[self.sym] = msg
 
                 if self.marketDataDict.__len__() == len(self.symbols):
-                    print("cGetMarketData - Dictionary completed")
+                    print("cGetMarketData - New Msg")
                     self.goRobot()
                 else:
                     print("cGetMarketData - Dictionary not completed yet....")
@@ -107,7 +107,78 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
     def goRobot(self):
         # Overridable Method
-        pass
+        # pass
+        self.mdOutput()
+
+
+    def mdOutput(self):
+        # if self.marketDataDict.__len__() == len(self.symbols):
+            #print("Dictionary completed")
+            for sym in self.symbols:
+                print("cGetMarketData", sym,
+                      "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
+                      "    Last :", round(self.getLastPrice(sym), 2),
+                      "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
+                # print("Dictionary market close: ",self.marketCloseData [sym])
+
+        # else:
+        #     print("Dictionary not completed yet....")
+
+    def getFullMD(self, ticker, depth):
+        return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
+
+    def getContractMultiplier(self, ticker: str) -> int:
+        return self.contractDetail[ticker]['instrument']['contractMultiplier']
+
+    def getContractLowLimit(self, ticker):
+        return self.contractDetail[ticker]['instrument']['lowLimitPrice']
+
+    def getContractHighLimit(self, ticker):
+        return self.contractDetail[ticker]['instrument']['highLimitPrice']
+
+    def getContractMinPriceIncrement(self, ticker):
+        return self.contractDetail[ticker]['instrument']['minPriceIncrement']
+
+    def getMaturityDate(self, ticker):
+        return self.contractDetail[ticker]['instrument']['maturityDate']
+
+    def getBidPrice(self, ticker):
+        try:
+            m = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
+        except:
+            m = 0
+        return m
+
+    def getBidSize(self, ticker):
+        try:
+            m = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
+        except:
+            m = 0
+        return m
+
+    def getOfferPrice(self, ticker):
+        try:
+            m = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
+        except:
+            m = 0
+        return m
+
+    def getOfferSize(self, ticker):
+        try:
+            m = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
+        except:
+            m = 0
+        return m
+
+    def getLastPrice(self, ticker):
+        try:
+            m = self.marketCloseData[ticker]['marketData']['LA']['price']
+        except:
+            m = 0
+        return m
+
+    def singleTrade(self, side, ticker, price, cant):
+        self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "FALSE")
 
 
 if __name__ == '__main__':
@@ -116,6 +187,14 @@ if __name__ == '__main__':
     ticker2 = "RFX20Jun19"
     suscriptTuple = (ticker1, ticker2)
     suscrip = cGetMarketData(suscriptTuple)
+    suscrip.start()
+    suscrip.mdOutput()
+
+    print("High Limit: ", ticker1, suscrip.getContractHighLimit(ticker1))
+    print("High Limit: ", ticker2, suscrip.getContractHighLimit(ticker2))
+    print("Multiplier: ", ticker1, suscrip.getContractMultiplier(ticker1))
+    print("Multiplier: ", ticker2, suscrip.getContractMultiplier(ticker2))
+
     # suscrip.start()
 
 else:

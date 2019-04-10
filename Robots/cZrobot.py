@@ -10,79 +10,12 @@ class zRobot (md.cGetMarketData):
     def __init__(self, symbols):
         super().__init__(symbols)
 
-        self.bookBySymbol = {}
+        # self.bookBySymbol = {}
 
     def goRobot(self):  # Overridable method, cada robot implementa el suyo
         pass
 
-    def mdOutput(self):
-        # if self.marketDataDict.__len__() == len(self.symbols):
-            #print("Dictionary completed")
-            for sym in self.symbols:
-                print("zRobot", sym,
-                      "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
-                      "    Last :", round(self.getLastPrice(sym), 2),
-                      "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
-                # print("Dictionary market close: ",self.marketCloseData [sym])
 
-        # else:
-        #     print("Dictionary not completed yet....")
-
-    def singleTrade(self, side, ticker, price, cant):
-        self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "FALSE")
-
-    def getFullMD(self, ticker, depth):
-        return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
-
-    def getContractMultiplier(self, ticker):
-        return self.contractDetail[ticker]['instrument']['contractMultiplier']
-
-    def getContractLowLimit(self, ticker):
-        return self.contractDetail[ticker]['instrument']['lowLimitPrice']
-
-    def getContractHighLimit(self, ticker):
-        return self.contractDetail[ticker]['instrument']['highLimitPrice']
-
-    def getContractMinPriceIncrement(self, ticker):
-        return self.contractDetail[ticker]['instrument']['minPriceIncrement']
-
-    def getMaturityDate(self, ticker):
-        return self.contractDetail[ticker]['instrument']['maturityDate']
-
-    def getBidPrice(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['BI'][0]['price']
-        except:
-            m = 0
-        return m
-
-    def getBidSize(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
-        except:
-            m = 0
-        return m
-
-    def getOfferPrice(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['OF'][0]['price']
-        except:
-            m = 0
-        return m
-
-    def getOfferSize(self, ticker):
-        try:
-            m = self.marketDataDict[ticker]['marketData']['OF'][0]['size']
-        except:
-            m = 0
-        return m
-
-    def getLastPrice(self, ticker):
-        try:
-            m = self.marketCloseData[ticker]['marketData']['LA']['price']
-        except:
-            m = 0
-        return m
 
     def getSUMContractsOpenOrders(self, ticker):
         contratos = 0
@@ -135,10 +68,6 @@ if __name__ == '__main__':
     suscription.mdOutput()
     # obf = suscription.getOrdenesAll(suscription.account)
 
-    print("High Limit: ", ticker1, suscription.getContractHighLimit(ticker1))
-    print("High Limit: ", ticker2, suscription.getContractHighLimit(ticker2))
-    print("Multiplier: ", ticker1,  suscription.getContractMultiplier(ticker1))
-    print("Multiplier: ", ticker2, suscription.getContractMultiplier(ticker2))
 
 
     print("Order Book All:", suscription.getOrdenesAll(suscription.account))
