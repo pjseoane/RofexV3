@@ -3,17 +3,19 @@ from Robots import cZrobot as ratioR
 
 class cRatio(ratioR.zRobot):
 
-    def __init__(self, symbols):
+    def __init__(self, symbols, myRatioBid, myRatioOffer, tradeSize, exposition):
         super().__init__(symbols)
 
-        self.symbols=symbols
-        self.myRatioBid = 0
-        self.myRatioOffer = 0
+        self.symbols = symbols
+        self.myRatioBid = myRatioBid
+        self.myRatioOffer = myRatioOffer
+        self.tradeSize = tradeSize
+        self.exposition = exposition
         self.ratioBidPrice = 0
         self.ratioOfferPrice = 0
 
         self.availableBid = 0
-        self.availableOffer = False
+        self.availableOffer = 0
 
         self.t0Multiplier = self.getContractMultiplier(self.symbols[0])
         self.t1Multiplier = self.getContractMultiplier(self.symbols[1])
@@ -32,35 +34,46 @@ class cRatio(ratioR.zRobot):
         # self.printBook()
 
     def printLineRatio(self):
-        print("Bid/Offer", round(self.ratioBidPrice, 2),"/", round(self.ratioOfferPrice, 2),
+        # print("print Line Ratio",self.ratioBidPrice )
+        print("Bid/Offer", round(self.ratioBidPrice, 2), "/", round(self.ratioOfferPrice, 2),
               " SIZE:", self.availableBid, "/", self.availableOffer)
 
     def ratioCalc(self):
-        t0BidPrice = self.getBidPrice(self.symbols[0])
-        t0BidSize = self.getBidSize(self.symbols[0])
-        t0offerPrice = self.getOfferPrice(self.symbols[0])
-        t0OfferSize = self.getOfferSize(self.symbols[0])
-        t0Multiplier = self.getContractMultiplier(self.symbols[0])
+        try:
+            self.ratioBidPrice = 0
+            self.ratioOfferPrice = 0
+            self.availableBid = 0
+            self.availableOffer = 0
+            t0BidPrice = self.getBidPrice(self.symbols[0])
+            t0BidSize = self.getBidSize(self.symbols[0])
+            t0offerPrice = self.getOfferPrice(self.symbols[0])
+            t0OfferSize = self.getOfferSize(self.symbols[0])
+            t0Multiplier = self.t0Multiplier
+            # t0Multiplier = self.getContractMultiplier(self.symbols[0])
 
-        t1BidPrice = self.getBidPrice(self.symbols[1])
-        t1BidSize = self.getBidSize(self.symbols[1])
-        t1OfferPrice = self.getOfferPrice(self.symbols[1])
-        t1OfferSize = self.getOfferSize(self.symbols[1])
-        t1Multiplier = self.getContractMultiplier(self.symbols[1])
+            t1BidPrice = self.getBidPrice(self.symbols[1])
+            t1BidSize = self.getBidSize(self.symbols[1])
+            t1OfferPrice = self.getOfferPrice(self.symbols[1])
+            t1OfferSize = self.getOfferSize(self.symbols[1])
+            t1Multiplier = self.t1Multiplier
+            # t1Multiplier = self.getContractMultiplier(self.symbols[1])
 
-        if t0offerPrice > 0:
-            self.ratioBidPrice = t1BidPrice / t0offerPrice
+            if t0offerPrice > 0:
+                self.ratioBidPrice = t1BidPrice / t0offerPrice
 
-            if t1BidPrice > 0:
-                self.availableBid = round(min(t1BidPrice * t1BidSize * t1Multiplier / (t0offerPrice * t0Multiplier),
+                if t1BidPrice > 0:
+                    self.availableBid = round(min(t1BidPrice * t1BidSize * t1Multiplier / (t0offerPrice * t0Multiplier),
                                           t0offerPrice * t0OfferSize * t0Multiplier / t1BidPrice), 2)
 
-        if t0BidPrice > 0:
-            self.ratioOfferPrice = t1OfferPrice / t0BidPrice
+            if t0BidPrice > 0:
+                self.ratioOfferPrice = t1OfferPrice / t0BidPrice
 
-            if t1OfferPrice > 0:
-                self.availableOffer = round(min(t1OfferPrice * t1OfferSize * t1Multiplier / (t0BidPrice*t0Multiplier),
+                if t1OfferPrice > 0:
+                    self.availableOffer = round(min(t1OfferPrice * t1OfferSize * t1Multiplier / (t0BidPrice*t0Multiplier),
                                                 t0BidPrice*t0BidSize*t0Multiplier/t1OfferPrice), 2)
+        except:
+            "cRatio - Some Error ...."
+
 
     def tradePlan(self, bid, offer, contracts, exposition):
         self.setMyRatioBid(bid)
@@ -74,13 +87,10 @@ if __name__ == '__main__':
     myBid   = 930
     myOffer = 950
     tradeSize = 5
-    MaxExposition = 100
+    maxExposition = 100
     suscriptTuple = (ticker1, ticker2)
 
-    r2tickets = cRatio(suscriptTuple)
-    r2tickets.setMyRatioBid(myBid)
-    r2tickets.setRatioOffer(myOffer)
-    r2tickets.tradePlan(myBid, myOffer, tradeSize, MaxExposition)
+    r2tickets = cRatio(suscriptTuple, myBid, myOffer, tradeSize, maxExposition)
 
     # print("t0", r2tickets.t0Multiplier, "myBid", r2tickets.myRatioBid, "myOffer", r2tickets.myRatioOffer)
     # print("t1", r2tickets.t1Multiplier)

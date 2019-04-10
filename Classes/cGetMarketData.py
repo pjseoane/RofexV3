@@ -55,7 +55,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
             self.ws.send(self.buildMessage)
             # print("(cGetMarketData)", self.contractDetail[self.sym])
-            print("(cGetMarketData) Sent Suscription msg for: ", self.sym)
+            print("cGetMarketData - Sent Suscription msg for: ", self.sym)
             sleep(1)
 
     def on_message(self, message):
