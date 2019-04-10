@@ -189,7 +189,7 @@ if __name__ == '__main__':
     myOffer = 935
     suscriptTuple = (ticker1, ticker2)
     suscription = indexUSD(suscriptTuple, myBid, myOffer)
-    suscription.start()
+    # suscription.start()
 
 else:
     pass

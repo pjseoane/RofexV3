@@ -18,10 +18,10 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         self.marketDataDict = {}
         self.contractDetail = {}
         self.marketCloseData = {}
-    #    self.runWS()
-
-    def start(self):
         self.runWS()
+
+    # def start(self):
+    #     self.runWS()
 
     def runWS(self):
         headers = {'X-Auth-Token:{token}'.format(token=self.token)}
@@ -55,7 +55,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
             self.ws.send(self.buildMessage)
             # print("(cGetMarketData)", self.contractDetail[self.sym])
-            print("(cGetMarketData) Sent Suscription msg for: ", self.sym)
+            print("cGetMarketData - Sent Suscription msg for: ", self.sym)
             sleep(1)
 
     def on_message(self, message):
@@ -71,7 +71,11 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
                 self.sym = msg['instrumentId']['symbol']
                 self.marketDataDict[self.sym] = msg
 
-                self.goRobot()
+                if self.marketDataDict.__len__() == len(self.symbols):
+                    print("cGetMarketData - Dictionary completed")
+                    self.goRobot()
+                else:
+                    print("cGetMarketData - Dictionary not completed yet....")
 
             elif msgType == 'OR':
                 print("En Mensaje OR")
@@ -112,7 +116,7 @@ if __name__ == '__main__':
     ticker2 = "RFX20Jun19"
     suscriptTuple = (ticker1, ticker2)
     suscrip = cGetMarketData(suscriptTuple)
-    suscrip.start()
+    # suscrip.start()
 
 else:
     pass

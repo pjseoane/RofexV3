@@ -15,23 +15,18 @@ class zRobot (md.cGetMarketData):
     def goRobot(self):  # Overridable method, cada robot implementa el suyo
         pass
 
-    # def positionBySymbol(self):
-    #     ordersFilled=self.getOrdenesFilled(self.accountId)
-    #     for
-
     def mdOutput(self):
-        # print ("En zRobot")
-        if self.marketDataDict.__len__() == len(self.symbols):
-            # print("Dictionary completed")
+        # if self.marketDataDict.__len__() == len(self.symbols):
+            #print("Dictionary completed")
             for sym in self.symbols:
-                print(sym,
+                print("zRobot", sym,
                       "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
                       "    Last :", round(self.getLastPrice(sym), 2),
                       "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
                 # print("Dictionary market close: ",self.marketCloseData [sym])
 
-        else:
-            print("Dictionary not completed yet....")
+        # else:
+        #     print("Dictionary not completed yet....")
 
     def singleTrade(self, side, ticker, price, cant):
         self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "FALSE")
@@ -136,16 +131,26 @@ if __name__ == '__main__':
     ticker2 = "RFX20Jun19"
     suscriptTuple = (ticker1, ticker2)
     suscription = zRobot(suscriptTuple)
-    suscription.start()
+    # suscription.start()
     suscription.mdOutput()
-    obf = suscription.getOrdenesAll(suscription.account)
+    # obf = suscription.getOrdenesAll(suscription.account)
 
     print("High Limit: ", ticker1, suscription.getContractHighLimit(ticker1))
+    print("High Limit: ", ticker2, suscription.getContractHighLimit(ticker2))
+    print("Multiplier: ", ticker1,  suscription.getContractMultiplier(ticker1))
+    print("Multiplier: ", ticker2, suscription.getContractMultiplier(ticker2))
+
+
     print("Order Book All:", suscription.getOrdenesAll(suscription.account))
     print("Order Book Open:", suscription.getOrdenesOpen(suscription.account))
     print("Order Book Filled:", suscription.getOrdenesFilled(suscription.account))
     # print("Filled Orders function", suscription.getFilledOrders(ticker1))
     print("Open Contracts / Value", suscription.getSUMContractsOpenOrders(ticker1), suscription.getSUMValueOpenOrders(ticker1))
-# msg = simplejson.loads(message)
+
+
+
+
+
+    # msg = simplejson.loads(message)
 else:
     pass
