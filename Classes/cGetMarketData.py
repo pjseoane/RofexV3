@@ -43,20 +43,19 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             sleep(1)
             conn_timeout -= 1
         else:
-            self.suscribeTickers()
+            # self.suscribeTickers()
 
-    def suscribeTickers(self):
-        for self.sym in self.symbols:
+            # def suscribeTickers(self):
+            for self.sym in self.symbols:
 
-            # Arma diccionario de detalles contratos para este Algo
-            self.contractDetail[self.sym] = self.instrumentDetail(self.sym, 'ROFX')
-            self.marketCloseData[self.sym] = self.getMarketData('ROFX', self.sym,
+                # Arma diccionario de detalles contratos para este Algo
+                self.contractDetail[self.sym] = self.instrumentDetail(self.sym, 'ROFX')
+                self.marketCloseData[self.sym] = self.getMarketData('ROFX', self.sym,
                                                                 "LA", "CL", "SE", "OI", "", "", "", str(1))
+                self.ws.send(self.buildMessage)
 
-            self.ws.send(self.buildMessage)
-            # print("(cGetMarketData)", self.contractDetail[self.sym])
-            print("cGetMarketData - Sent Suscription msg for: ", self.sym)
-            sleep(1)
+                print("cGetMarketData - Sent Suscription msg for: ", self.sym)
+                sleep(1)
 
     def on_message(self, message):
         self.numMessages += 1
@@ -68,14 +67,19 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             if msgType == 'MD':
                 # print("cgetMarketData New msg MD->: ", msg)
                 # Arma y carga el Dictionary
-                self.sym = msg['instrumentId']['symbol']
-                self.marketDataDict[self.sym] = msg
+
+                # Busca de que sym es el mensaje que viene y lo coloca en el Dictionary
+                self.marketDataDict[msg['instrumentId']['symbol']] = msg
 
                 if self.marketDataDict.__len__() == len(self.symbols):
-                    print("cGetMarketData - New Msg")
-                    self.goRobot()
-                else:
-                    print("cGetMarketData - Dictionary not completed yet....")
+                    print("cGetMarketData - Dict OK, New Msg")
+                    try:
+                        self.goRobot()
+                    except:
+                        print("Problem in goRobot()")
+
+                # else:
+                #     print("cGetMarketData - Dictionary not completed yet....")
 
             elif msgType == 'OR':
                 print("En Mensaje OR")
@@ -94,9 +98,10 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
     def on_close():
         print("### connection closed ###")
 
-    def on_open(self):
-        pass
-        # print("WS Conection Open...")
+    @staticmethod
+    def on_open():
+        # pass
+        print("WS Conection Open...")
 
     @property
     def buildMessage(self):
@@ -110,24 +115,18 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         # pass
         self.mdOutput()
 
-
     def mdOutput(self):
-        # if self.marketDataDict.__len__() == len(self.symbols):
-            #print("Dictionary completed")
-            for sym in self.symbols:
-                print("cGetMarketData", sym,
+
+        for sym in self.symbols:
+            print("cGetMarketData", sym,
                       "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
                       "    Last :", round(self.getLastPrice(sym), 2),
                       "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
-                # print("Dictionary market close: ",self.marketCloseData [sym])
-
-        # else:
-        #     print("Dictionary not completed yet....")
 
     def getFullMD(self, ticker, depth):
         return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
 
-    def getContractMultiplier(self, ticker: str) -> int:
+    def getContractMultiplier(self, ticker):
         return self.contractDetail[ticker]['instrument']['contractMultiplier']
 
     def getContractLowLimit(self, ticker):
@@ -149,7 +148,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             m = 0
         return m
 
-    def getBidSize(self, ticker):
+    def getBidSize(self, ticker) -> int:
         try:
             m = self.marketDataDict[ticker]['marketData']['BI'][0]['size']
         except:

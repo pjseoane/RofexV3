@@ -143,10 +143,6 @@ if __name__ == '__main__':
     print(user1.activeWSEndpoint)
     # print("Instrumentos :",user1.instrumentos())
     # print("Instruments DetailsAll:",user1.instrumentsDetailsAll())
-    try:
-        user1.singleTrade("SELL", "RFX20Jun19","46230", "9")
-    except:
-        print("Salio x error")
+
 else:
     pass
-    #print("Nombre de Clase/else:", __name__)
