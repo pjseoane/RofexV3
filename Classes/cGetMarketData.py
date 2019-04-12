@@ -19,6 +19,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         self.contractDetail = {}
         self.marketCloseData = {}
         self.bookFilled = {}
+        self.netExposition = 0
         # self.runWS()
 
     def start(self):
@@ -182,16 +183,24 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
     def updateBook(self):
         print ("In updateBook :")
+        self.netExposition=0
 
         for sym in self.symbols:
             filledContracts = self.getFilledContracts(sym)
-            filledValue = self.getFilledValue(sym)/self.getContractMultiplier(sym)
+            filledV = self.getFilledValue(sym)
+            filledValue = filledV/self.getContractMultiplier(sym)
+            self.netExposition += filledV
 
-            self.bookFilled['symbol'] = sym
-            self.bookFilled['contracts'] = filledContracts
-            self.bookFilled['avg'] = filledValue / filledContracts
+            if filledContracts:
+                self.bookFilled['symbol'] = sym
+                self.bookFilled['contracts'] = filledContracts
+                self.bookFilled['avg'] = filledValue / filledContracts
 
-            print("Ticker :", sym, "Contracts: ", self.bookFilled['contracts'], "Avg :", self.bookFilled['avg'])
+
+                print("Ticker :", sym, "Contracts: ", self.bookFilled['contracts'], "Avg :", self.bookFilled['avg'])
+
+            else:
+                print("empty book")
             #print("Dict   :", self.bookFilled)
 
     def getFilledContracts(self, ticker):
@@ -216,7 +225,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
     def getFilledValue(self, ticker):
         contratos = 0
         sum = 0
-
+        #self.netExposition = 0
         try:
             bookFilled = self.getOrdenesFilled(self.account)['orders']
             for order in bookFilled:
@@ -227,13 +236,33 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
                     contratos += order['orderQty'] * mult
                     sum += order['orderQty'] * self.getContractMultiplier(ticker) * order['price'] * mult
-
+                #self.netExposition +=sum
             return sum
 
         except:
             print("Error getFilledValue")
             pass
 
+    def balanceBook(self):
+        print("Net Exposition....... :",self.netExposition)
+
+        try:
+            if self.netExposition < 0:
+                # buy usd
+                contractsToBalance = int(abs(self.netExposition/self.getContractMultiplier(self.symbols[0])/self.getOfferPrice(self.symbols[0])))
+                if contractsToBalance >0:
+                    print("Contracts to Buy ...:", contractsToBalance)
+                    self.singleTrade("BUY", self.symbols[0], str(self.getOfferPrice(self.symbols[0])), str(contractsToBalance))
+
+            else:
+                # sell 1st ticket
+                contractsToBalance = int(abs(self.netExposition / self.getContractMultiplier(self.symbols[0]) / self.getBidPrice(self.symbols[0])))
+                if contractsToBalance >0:
+                    print("Contracts to Sell...:", contractsToBalance)
+                    self.singleTrade("SELL", self.symbols[0], str(self.getBidPrice(self.symbols[0])), str(contractsToBalance))
+
+        except:
+            print("error en balanceBook")
 
 if __name__ == '__main__':
 

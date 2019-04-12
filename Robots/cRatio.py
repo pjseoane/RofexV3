@@ -21,7 +21,7 @@ class cRatio(md.cGetMarketData):
     t0Multiplier: int
     t1Multiplier: int
 
-    def __init__(self, symbols, myRatioBid, myRatioOffer, tradeSize, exposition):
+    def __init__(self, symbols, myRatioBid, myRatioOffer, tradeSize, exposition, algoName):
 
         super().__init__(symbols)
 
@@ -30,6 +30,7 @@ class cRatio(md.cGetMarketData):
         self.myRatioOffer = myRatioOffer
         self.tradeSize = tradeSize
         self.exposition = exposition
+        #self.algoName = algoName
 
         self.ratioBidPrice = 0
         self.ratioOfferPrice = 0
@@ -45,7 +46,7 @@ class cRatio(md.cGetMarketData):
 
 
 
-        print("***********  init OK..")
+        print("***********  Running Algo", algoName)
 
     def setMyRatioBid(self, myRatioBid):
         self.myRatioBid = myRatioBid
@@ -60,7 +61,7 @@ class cRatio(md.cGetMarketData):
         self.printLineRatio()
         self.updateBook()
         self.tradePlan()
-        # self.printBook()
+        self.balanceBook()
 
     def printLineRatio(self):
 
@@ -132,13 +133,13 @@ if __name__ == '__main__':
     print("cRatio Main")
     ticker1 = "DOJun19"
     ticker2 = "RFX20Jun19"
-    myBid   = 935
-    myOffer = 945
+    myBid   = 930
+    myOffer = 940
     tradeContracts = 5
     maxExposition = 100
     suscriptTuple = (ticker1, ticker2)
 
-    r2tickets = cRatio(suscriptTuple, myBid, myOffer, tradeContracts, maxExposition)
+    r2tickets = cRatio(suscriptTuple, myBid, myOffer, tradeContracts, maxExposition, "Index -> USD")
     r2tickets.start()
 
 
