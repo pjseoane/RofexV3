@@ -8,61 +8,7 @@ class cBookAnalysis (zR.zRobot):
     def __init__(self, symbols):
         super().__init__(symbols)
 
-        self.bookFilled = {}
-
-    def updateBook(self):
-        print ("In updateBook :")
-
-        for sym in self.symbols:
-            filledContracts = self.getFilledContracts(sym)
-            filledValue = self.getFilledValue(sym)/self.getContractMultiplier(sym)
-
-            self.bookFilled['symbol'] = sym
-            self.bookFilled['contracts'] = filledContracts
-            self.bookFilled['avg'] = filledValue / filledContracts
-
-            print("Ticker :", sym, "Contracts: ", self.bookFilled['contracts'], "Avg :", self.bookFilled['avg'])
-            #print("Dict   :", self.bookFilled)
-
-    def getFilledContracts(self, ticker):
-        contratos = 0
-
-        try:
-            bookFilled = self.getOrdenesFilled(self.account)['orders']
-            for order in bookFilled:
-                mult = 1
-                if order['instrumentId']['symbol'] == ticker:
-                    if order['side'] == 'SELL':
-                        mult = -1
-
-                    contratos += order['orderQty'] * mult
-                    # sum += x['orderQty'] * x['price'] * mult
-
-            return contratos
-        except:
-            print("Error getFilledContracts")
-            pass
-
-    def getFilledValue(self, ticker):
-        contratos = 0
-        sum = 0
-
-        try:
-            bookFilled = self.getOrdenesFilled(self.account)['orders']
-            for order in bookFilled:
-                mult = 1
-                if order['instrumentId']['symbol'] == ticker:
-                    if order['side'] == 'SELL':
-                        mult = -1
-
-                    contratos += order['orderQty'] * mult
-                    sum += order['orderQty'] * self.getContractMultiplier(ticker) * order['price'] * mult
-
-            return sum
-
-        except:
-            print("Error getFilledValue")
-            pass
+        # self.bookFilled = {}
 
 
 if __name__ == '__main__':
