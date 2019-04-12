@@ -128,58 +128,6 @@ class cRatio(md.cGetMarketData):
         self.singleTrade("SELL", sellTicker, str(sellPrice), str(int(sellContracts)))
 
 
-    # def updateBook(self):
-    #     print("In updateBook :")
-    #     for sym in self.symbols:
-    #         print("Ticker :", sym, "Contracts: ", self.getFilledContracts(sym), " Value :", self.getFilledValue(sym))
-    #
-    # def getFilledContracts(self, ticker):
-    #     contratos = 0
-    #
-    #     try:
-    #         dFilledOrders = self.getOrdenesFilled(self.account)['orders']
-    #         for order in dFilledOrders:
-    #             mult = 1
-    #             if order['instrumentId']['symbol'] == ticker:
-    #                 if order['side'] == 'SELL':
-    #                     mult = -1
-    #
-    #                 contratos += order['orderQty'] * mult
-    #                 # sum += x['orderQty'] * x['price'] * mult
-    #
-    #         return contratos
-    #     except:
-    #         print("Error getFilledContracts")
-    #         pass
-    #
-    # def getFilledValue(self, ticker):
-    #     contratos = 0
-    #     sum = 0
-    #
-    #     try:
-    #         dFilledOrders = self.getOrdenesFilled(self.account)['orders']
-    #         for order in dFilledOrders:
-    #             mult = 1
-    #             if order['instrumentId']['symbol'] == ticker:
-    #                 if order['side'] == 'SELL':
-    #                     mult = -1
-    #
-    #                 contratos += order['orderQty'] * mult
-    #                 sum += order['orderQty'] * self.getContractMultiplier(ticker) * order['price'] * mult
-    #
-    #         return sum
-    #
-    #     except:
-    #         print("Error getFilledValue")
-    #         pass
-
-    # def printBook(self):
-    #     print("Book-Total trades: ", self.trades,
-    #           self.symbols[1], self.t1Position, ":", round(self.sumt1Value, 2),
-    #           self.symbols[0], self.t0Position, ":", round(self.sumt0Value, 2),
-    #           " Precio prom: ",round( self.openAvgPrice ,2))
-
-
 if __name__ == '__main__':
     print("cRatio Main")
     ticker1 = "DOJun19"
