@@ -108,6 +108,10 @@ class cSetUpEnvironment:
         return self.retReq()
 
     def getOrdenesOpen(self, accountId):
+        """
+
+        :rtype: object
+        """
         self.url = self.activeEndpoint + "rest/order/actives?accountId=" + accountId
         return self.retReq()
 
