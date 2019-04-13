@@ -29,6 +29,11 @@ class cRatio(masterR.zRobot):
 
         print("***********  Algo Name:", self.algoName)
 
+    def setRatioMarket(self,bid,offer,size):
+        self.myRatioBid = bid
+        self.myRatioOffer = offer
+        self.tradeSize = size
+
     def setMyRatioBid(self, myRatioBid):
         self.myRatioBid = myRatioBid
 
