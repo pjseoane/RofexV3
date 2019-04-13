@@ -36,7 +36,7 @@ class zRobot (md.cGetMarketData):
                 print("Ticker :", sym, "Contracts: ", self.bookFilled['contracts'], "Avg :", self.bookFilled['avg'])
 
             else:
-                print("empty book")
+                print(sym ,"...empty book")
 
     def getFilledContracts(self, ticker):
         contratos = 0
@@ -80,19 +80,20 @@ class zRobot (md.cGetMarketData):
         print("Net Exposition....... :", self.netExposition)
 
         try:
-            if self.netExposition < 0:
-                # buy 1st ticket
-                contractsToBalance = int(abs(self.netExposition/self.getContractMultiplier(self.symbols[0])/self.getOfferPrice(self.symbols[0])))
-                if contractsToBalance >0:
-                    print("Contracts to Buy ...:", contractsToBalance)
-                    self.singleTrade("BUY", self.symbols[0], str(self.getOfferPrice(self.symbols[0])), str(contractsToBalance))
+            if self.netExposition !=0:
+                if self.netExposition < 0:
+                    # buy 1st ticket
+                    contractsToBalance = int(abs(self.netExposition/self.getContractMultiplier(self.symbols[0])/self.getOfferPrice(self.symbols[0])))
+                    if contractsToBalance >0:
+                        print("Contracts to Buy ...:", contractsToBalance)
+                        self.singleTrade("BUY", self.symbols[0], str(self.getOfferPrice(self.symbols[0])), str(contractsToBalance))
 
-            else:
-                # sell 1st ticket
-                contractsToBalance = int(abs(self.netExposition / self.getContractMultiplier(self.symbols[0]) / self.getBidPrice(self.symbols[0])))
-                if contractsToBalance >0:
-                    print("Contracts to Sell...:", contractsToBalance)
-                    self.singleTrade("SELL", self.symbols[0], str(self.getBidPrice(self.symbols[0])), str(contractsToBalance))
+                else:
+                    # sell 1st ticket
+                    contractsToBalance = int(abs(self.netExposition / self.getContractMultiplier(self.symbols[0]) / self.getBidPrice(self.symbols[0])))
+                    if contractsToBalance > 0:
+                        print("Contracts to Sell...:", contractsToBalance)
+                        self.singleTrade("SELL", self.symbols[0], str(self.getBidPrice(self.symbols[0])), str(contractsToBalance))
 
         except:
             print("error en balanceBook")

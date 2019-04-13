@@ -1,25 +1,9 @@
-from typing import Any, Union
+
 
 from Robots import cZrobot as masterR
-from Classes import cGetMarketData as md
 
 
 class cRatio(masterR.zRobot):
-
-    # t0BidPrice: float
-    # t1BidPrice: float
-    #
-    # t0offerPrice: float
-    # t1OfferPrice: float
-    #
-    # t0OfferSize: int
-    # t1OfferSize: int
-    #
-    # t0BidSize: int
-    # t1BidSize: int
-    #
-    # t0Multiplier: int
-    # t1Multiplier: int
 
     def __init__(self, symbols, myRatioBid, myRatioOffer, tradeSize, exposition, algoName):
 
@@ -43,7 +27,7 @@ class cRatio(masterR.zRobot):
         self.sumt0Value = 0
         self.openAvgPrice = 0
 
-        print("***********  Running Algo", self.algoName)
+        print("***********  Algo Name:", self.algoName)
 
     def setMyRatioBid(self, myRatioBid):
         self.myRatioBid = myRatioBid
@@ -53,7 +37,6 @@ class cRatio(masterR.zRobot):
 
     def goRobot(self):
         self.mdOutput()
-        self.getTickerValues()
         self.ratioCalc()
         self.printLineRatio()
         self.updateBook()
@@ -62,23 +45,8 @@ class cRatio(masterR.zRobot):
 
     def printLineRatio(self):
 
-        print("Bid/Offer (", self.myRatioBid, "-", self.myRatioOffer,")", round(self.ratioBidPrice, 2), "/", round(self.ratioOfferPrice, 2),
+        print("cR2t*","Bid/Offer (", self.myRatioBid, "-", self.myRatioOffer,")", round(self.ratioBidPrice, 2), "/", round(self.ratioOfferPrice, 2),
               " SIZE:", self.availableBid, "/", self.availableOffer)
-
-    def getTickerValues(self):
-        pass
-        # self.t0Multiplier = self.getContractMultiplier(self.symbols[0])
-        # self.t1Multiplier = self.getContractMultiplier(self.symbols[1])
-
-        # self.t0BidPrice = self.getBidPrice(self.symbols[0])
-        # self.t0BidSize = self.getBidSize(self.symbols[0])
-        # self.t0offerPrice = self.getOfferPrice(self.symbols[0])
-        # self.t0OfferSize = self.getOfferSize(self.symbols[0])
-        #
-        # self.t1BidPrice = self.getBidPrice(self.symbols[1])
-        # self.t1BidSize = self.getBidSize(self.symbols[1])
-        # self.t1OfferPrice = self.getOfferPrice(self.symbols[1])
-        # self.t1OfferSize = self.getOfferSize(self.symbols[1])
 
     def ratioCalc(self):
         try:
@@ -88,24 +56,15 @@ class cRatio(masterR.zRobot):
 
                 if self.getBidPrice(self.symbols[1]) > 0:
                     self.availableBid = min(self.getBidSize(self.symbols[1]), self.getOfferSize(self.symbols[0]))
-                    # self.availableBid = int(
-                    # round(
-                    # min(self.getBidSize(self.symbols[1]) * self.getContractMultiplier(self.symbols[1])
-                    # * self.getBidPrice(self.symbols[1]),
-                    # self.getOfferPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]) *
-                    # self.getOfferSize(self.symbols[0])) \
-                    # / self.getBidPrice(self.symbols[1]), 0))
 
             if self.getBidPrice(self.symbols[0]) > 0:
                 self.ratioOfferPrice = self.getOfferPrice(self.symbols[1]) / self.getBidPrice(self.symbols[0])
 
                 if self.getOfferPrice(self.symbols[1]) > 0:
                     self.availableOffer = min(self.getOfferSize(self.symbols[1]), self.getBidSize(self.symbols[0]))
-                    # self.availableOffer = int(round(min(self.getOfferPrice(self.symbols[1]) * self.getContractMultiplier(self.symbols[1]) * self.getOfferSize(self.symbols[1]), self.getBidSize(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]) * self.getBidPrice(self.symbols[0]))\
-                    #                       / self.getOfferPrice(self.symbols[1]), 0))
 
         except:
-            "cRatio - Some Error ...."
+            "CR2t* - Some Error ...."
 
     def tradePlan(self):
         print("In trade plan...")
@@ -118,7 +77,7 @@ class cRatio(masterR.zRobot):
                 t0Contracts = int(
                     round(
                         self.getOfferPrice(self.symbols[1]) * self.availableOffer
-                        *self.getContractMultiplier(self.symbols[1])
+                        * self.getContractMultiplier(self.symbols[1])
                         / (self.getBidPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]))
                         , 0)
                 )
@@ -129,7 +88,7 @@ class cRatio(masterR.zRobot):
             except:
                 print("error en Buy the Ratio")
 
-        if self.myRatioOffer < self.ratioBidPrice > 0:
+        if self.ratioBidPrice > self.myRatioOffer > 0:
             print("Sell the ratio ")
             print("***", self.myRatioOffer, self.ratioBidPrice)
             try:
@@ -160,13 +119,13 @@ if __name__ == '__main__':
 
     # ticker1 = "AY24DJun19"
     # ticker2 = "AY24Jun19"
-    myBid   = 900
-    myOffer = 990
+    myBid   = 0
+    myOffer = 0
     tradeContracts = 5
     maxExposition = 100
     suscriptTuple = (ticker1, ticker2)
 
-    r2tickets = cRatio(suscriptTuple, myBid, myOffer, tradeContracts, maxExposition, "Index -> USD")
+    r2tickets = cRatio(suscriptTuple, myBid, myOffer, tradeContracts, maxExposition, "cRatioTicker")
     r2tickets.start()
 
 
