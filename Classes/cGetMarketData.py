@@ -18,12 +18,11 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
         self.marketDataDict = {}
         self.contractDetail = {}
         self.marketCloseData = {}
-        self.bookFilled = {}
-        self.netExposition = 0
+
         # self.runWS()
 
     def start(self):
-         self.runWS()
+        self.runWS()
 
     def runWS(self):
         headers = {'X-Auth-Token:{token}'.format(token=self.token)}
@@ -45,9 +44,7 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             sleep(1)
             conn_timeout -= 1
         else:
-            # self.suscribeTickers()
 
-            # def suscribeTickers(self):
             for self.sym in self.symbols:
 
                 # Arma diccionario de detalles contratos para este Algo
@@ -69,7 +66,6 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
             if msgType == 'MD':
                 # print("cgetMarketData New msg MD->: ", msg)
                 # Arma y carga el Dictionary
-
                 # Busca de que sym es el mensaje que viene y lo coloca en el Dictionary
                 self.marketDataDict[msg['instrumentId']['symbol']] = msg
 
@@ -114,16 +110,15 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
 
     def goRobot(self):
         # Overridable Method
-        # pass
-        self.mdOutput()
+        pass
 
     def mdOutput(self):
 
         for sym in self.symbols:
-            print("cGetMarketData", sym,
-                      "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
-                      "    Last :", round(self.getLastPrice(sym), 2),
-                      "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
+            print("cGetMarketData*", sym,
+                        "    Bid/Ask :", round(self.getBidPrice(sym), 2), "/", round(self.getOfferPrice(sym), 2),
+                        "    Last :", round(self.getLastPrice(sym), 2),
+                        "    Size :", self.getBidSize(sym), "/", self.getOfferSize(sym))
 
     def getFullMD(self, ticker, depth):
         return self.getMarketData('ROFX', ticker, 'BI', 'OF', 'LA', 'OP', 'CL', 'SE', 'OI', depth)
@@ -181,88 +176,6 @@ class cGetMarketData(rLogin.cSetUpEnvironment):
     def singleTrade(self, side, ticker, price, cant):
         self.newSingleOrder(self.marketId_, ticker, price, cant, "LIMIT", side, "DAY", self.account, "FALSE")
 
-    def updateBook(self):
-        print ("In updateBook :")
-        self.netExposition=0
-
-        for sym in self.symbols:
-            filledContracts = self.getFilledContracts(sym)
-            filledV = self.getFilledValue(sym)
-            filledValue = filledV/self.getContractMultiplier(sym)
-            self.netExposition += filledV
-
-            if filledContracts:
-                self.bookFilled['symbol'] = sym
-                self.bookFilled['contracts'] = filledContracts
-                self.bookFilled['avg'] = filledValue / filledContracts
-
-
-                print("Ticker :", sym, "Contracts: ", self.bookFilled['contracts'], "Avg :", self.bookFilled['avg'])
-
-            else:
-                print("empty book")
-            #print("Dict   :", self.bookFilled)
-
-    def getFilledContracts(self, ticker):
-        contratos = 0
-
-        try:
-            bookFilled = self.getOrdenesFilled(self.account)['orders']
-            for order in bookFilled:
-                mult = 1
-                if order['instrumentId']['symbol'] == ticker:
-                    if order['side'] == 'SELL':
-                        mult = -1
-
-                    contratos += order['orderQty'] * mult
-                    # sum += x['orderQty'] * x['price'] * mult
-
-            return contratos
-        except:
-            print("Error getFilledContracts")
-            pass
-
-    def getFilledValue(self, ticker):
-        contratos = 0
-        sum = 0
-        #self.netExposition = 0
-        try:
-            bookFilled = self.getOrdenesFilled(self.account)['orders']
-            for order in bookFilled:
-                mult = 1
-                if order['instrumentId']['symbol'] == ticker:
-                    if order['side'] == 'SELL':
-                        mult = -1
-
-                    contratos += order['orderQty'] * mult
-                    sum += order['orderQty'] * self.getContractMultiplier(ticker) * order['price'] * mult
-                #self.netExposition +=sum
-            return sum
-
-        except:
-            print("Error getFilledValue")
-            pass
-
-    def balanceBook(self):
-        print("Net Exposition....... :",self.netExposition)
-
-        try:
-            if self.netExposition < 0:
-                # buy usd
-                contractsToBalance = int(abs(self.netExposition/self.getContractMultiplier(self.symbols[0])/self.getOfferPrice(self.symbols[0])))
-                if contractsToBalance >0:
-                    print("Contracts to Buy ...:", contractsToBalance)
-                    self.singleTrade("BUY", self.symbols[0], str(self.getOfferPrice(self.symbols[0])), str(contractsToBalance))
-
-            else:
-                # sell 1st ticket
-                contractsToBalance = int(abs(self.netExposition / self.getContractMultiplier(self.symbols[0]) / self.getBidPrice(self.symbols[0])))
-                if contractsToBalance >0:
-                    print("Contracts to Sell...:", contractsToBalance)
-                    self.singleTrade("SELL", self.symbols[0], str(self.getBidPrice(self.symbols[0])), str(contractsToBalance))
-
-        except:
-            print("error en balanceBook")
 
 if __name__ == '__main__':
 
