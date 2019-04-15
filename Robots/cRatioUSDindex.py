@@ -15,45 +15,45 @@ class cRatio(r2t.cRatio):
         self.ratioCalc()
         self.printLineRatio()
         self.updateBook()
-        self.tradePlan()
-        self.balanceBook()
+        self.testTradeOpportunity()
+        # self.balanceBook()
 
-    def tradePlan(self):
-        print("cRUSDIndx* In trade plan...")
-        self.availableOffer = int(round(self.availableOffer, 0))
-        self.availableBid = int(round(self.availableBid, 0))
 
-        if self.myRatioBid > self.ratioOfferPrice > 0:
-            print("cRUSDIndx* Buy the ratio ")
-            try:
-                t0Contracts = int(
-                    round(
-                        self.getOfferPrice(self.symbols[1]) * self.availableOffer
-                        *self.getContractMultiplier(self.symbols[1])
-                        / (self.getBidPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]))
-                        , 0)
-                )
+    def buyTheRatio(self):
+        print("cRUSDIndx* Buy the ratio ")
+        try:
+            t0Contracts = int(
+                round(
+                    self.getOfferPrice(self.symbols[1]) * self.availableOffer
+                    * self.getContractMultiplier(self.symbols[1])
+                    / (self.getBidPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]))
+                    , 0)
+            )
 
-                self.tradeRatio(self.symbols[1], self.getOfferPrice(self.symbols[1]), min(self.availableOffer, self.tradeSize), self.symbols[0], self.getBidPrice(self.symbols[0]), min(t0Contracts,self.tradeSize))
-                self.resetBidOffer(0.997, 0.997)
+            self.tradeRatio(self.symbols[1], self.getOfferPrice(self.symbols[1]),
+                            min(self.availableOffer, self.tradeSize), self.symbols[0],
+                            self.getBidPrice(self.symbols[0]), min(t0Contracts, self.tradeSize))
+            self.resetBidOffer(0.997, 0.997)
 
-            except:
-                print("cRUSDIndx* error en Buy the Ratio")
+        except:
+            print("cRUSDIndx* error en Buy the Ratio")
 
-        if self.ratioBidPrice > self.myRatioOffer > 0:
-            print("cRUSDIndx* Sell the ratio ")
-            print("cRUSDIndx*", self.myRatioOffer, self.ratioBidPrice)
-            try:
-                t0Contracts = int(round(self.getBidPrice(self.symbols[1]) * self.availableBid*self.getContractMultiplier(self.symbols[1]) / (self.getOfferPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0])), 0))
+    def sellTheRatio(self):
+        print("cRUSDIndx* Sell the ratio ")
+        print("cRUSDIndx*", self.myRatioOffer, self.ratioBidPrice)
+        try:
+            t0Contracts = int(round(
+                self.getBidPrice(self.symbols[1]) * self.availableBid * self.getContractMultiplier(self.symbols[1]) / (
+                            self.getOfferPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0])), 0))
 
-                self.tradeRatio(self.symbols[0], self.getOfferPrice(self.symbols[0]), min(t0Contracts, self.tradeSize),
-                                self.symbols[1], self.getBidPrice(self.symbols[1]), min(self.availableOffer, self.tradeSize))
-                self.resetBidOffer(1.003, 1.003)
+            self.tradeRatio(self.symbols[0], self.getOfferPrice(self.symbols[0]), min(t0Contracts, self.tradeSize),
+                            self.symbols[1], self.getBidPrice(self.symbols[1]),
+                            min(self.availableOffer, self.tradeSize))
+            self.resetBidOffer(1.003, 1.003)
 
-            except:
-                print("cRUSDIndx*  error en Sell the Ratio")
+        except:
+            print("cRUSDIndx*  error en Sell the Ratio")
 
-    
 if __name__ == '__main__':
     print("cRatio USDIndex")
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     # ticker1 = "AY24DJun19"
     # ticker2 = "AY24Jun19"
-    myBid   = 0
+    myBid   = 950
     myOffer = 0
     tradeContracts = 5
     maxExposition = 100

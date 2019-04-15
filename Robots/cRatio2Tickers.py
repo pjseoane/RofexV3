@@ -45,8 +45,8 @@ class cRatio(masterR.zRobot):
         self.ratioCalc()
         self.printLineRatio()
         self.updateBook()
-        self.tradePlan()
-        self.balanceBook()
+        self.testTradeOpportunity()
+        # self.balanceBook()
 
     def printLineRatio(self):
 
@@ -60,51 +60,43 @@ class cRatio(masterR.zRobot):
                 self.ratioBidPrice = self.getBidPrice(self.symbols[1]) / self.getOfferPrice(self.symbols[0])
 
                 if self.getBidPrice(self.symbols[1]) > 0:
-                    self.availableBid = min(self.getBidSize(self.symbols[1]), self.getOfferSize(self.symbols[0]))
+                    self.availableBid = int(round(min(self.getBidSize(self.symbols[1]), self.getOfferSize(self.symbols[0])),0))
 
             if self.getBidPrice(self.symbols[0]) > 0:
                 self.ratioOfferPrice = self.getOfferPrice(self.symbols[1]) / self.getBidPrice(self.symbols[0])
 
                 if self.getOfferPrice(self.symbols[1]) > 0:
-                    self.availableOffer = min(self.getOfferSize(self.symbols[1]), self.getBidSize(self.symbols[0]))
+                    self.availableOffer = int(round(min(self.getOfferSize(self.symbols[1]), self.getBidSize(self.symbols[0])),0))
 
         except:
             "CR2t* - Some Error ...."
 
-    def tradePlan(self):
+
+    def testTradeOpportunity(self):
         print("In trade plan...")
-        self.availableOffer = int(round(self.availableOffer, 0))
-        self.availableBid = int(round(self.availableBid, 0))
 
-        if self.myRatioBid > self.ratioOfferPrice > 0:
-            print("Buy the ratio ")
-            try:
-                t0Contracts = int(
-                    round(
-                        self.getOfferPrice(self.symbols[1]) * self.availableOffer
-                        * self.getContractMultiplier(self.symbols[1])
-                        / (self.getBidPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]))
-                        , 0)
-                )
+        if self.myRatioBid > 0 and self.myRatioBid > self.ratioOfferPrice:
+            self.buyTheRatio()
+            self.resetBidOffer(0.997, 0.997)
 
-                self.tradeRatio(self.symbols[1], self.getOfferPrice(self.symbols[1]), min(self.availableOffer, self.tradeSize), self.symbols[0], self.getBidPrice(self.symbols[0]), min(t0Contracts,self.tradeSize))
-                self.resetBidOffer(0.997, 0.997)
 
-            except:
-                print("error en Buy the Ratio")
+        if self.myRatioOffer > 0 and self.ratioBidPrice > self.myRatioOffer:
+            self.sellTheRatio()
+            self.resetBidOffer(1.003, 1.003)
 
-        if self.ratioBidPrice > self.myRatioOffer > 0:
-            print("Sell the ratio ")
-            print("***", self.myRatioOffer, self.ratioBidPrice)
-            try:
-                t0Contracts = int(round(self.getBidPrice(self.symbols[1]) * self.availableBid*self.getContractMultiplier(self.symbols[1]) / (self.getOfferPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0])), 0))
 
-                self.tradeRatio(self.symbols[0], self.getOfferPrice(self.symbols[0]), min(t0Contracts, self.tradeSize),
-                                self.symbols[1], self.getBidPrice(self.symbols[1]), min(self.availableOffer, self.tradeSize))
-                self.resetBidOffer(1.003, 1.003)
 
-            except:
-                print("error en Sell the Ratio")
+    def buyTheRatio(self):
+
+        print("Buy the ratio ")
+
+
+
+    def sellTheRatio(self):
+        # pass
+        print("Sell the ratio ")
+
+
 
     def resetBidOffer(self, factorDown, factorUp):
         self.myRatioBid *= factorDown
@@ -124,7 +116,7 @@ if __name__ == '__main__':
 
     # ticker1 = "AY24DJun19"
     # ticker2 = "AY24Jun19"
-    myBid   = 0
+    myBid   = 950
     myOffer = 0
     tradeContracts = 5
     maxExposition = 100
