@@ -40,7 +40,7 @@ class cRatio(r2t.cRatio):
 
     def sellTheRatio(self):
         print("cRUSDIndx* Sell the ratio ")
-        print("cRUSDIndx*", self.myRatioOffer, self.ratioBidPrice)
+        # print("cRUSDIndx*", self.myRatioOffer, self.ratioBidPrice)
         try:
             t0Contracts = int(round(
                 self.getBidPrice(self.symbols[1]) * self.availableBid * self.getContractMultiplier(self.symbols[1]) / (
@@ -48,7 +48,7 @@ class cRatio(r2t.cRatio):
 
             self.tradeRatio(self.symbols[0], self.getOfferPrice(self.symbols[0]), min(t0Contracts, self.tradeSize),
                             self.symbols[1], self.getBidPrice(self.symbols[1]),
-                            min(self.availableOffer, self.tradeSize))
+                            min(self.availableBid, self.tradeSize))
             self.resetBidOffer(1.003, 1.003)
 
         except:
@@ -63,8 +63,9 @@ if __name__ == '__main__':
 
     # ticker1 = "AY24DJun19"
     # ticker2 = "AY24Jun19"
-    myBid   = 950
-    myOffer = 0
+    myBid   = 930
+    myOffer = 935
+
     tradeContracts = 5
     maxExposition = 100
     suscriptTuple = (ticker1, ticker2)
