@@ -14,44 +14,48 @@ class cAY24ccl(r2t.cRatio):
         self.mdOutput()
         self.ratioCalc()
         self.printLineRatio()
-        self.updateBook()
-        self.tradePlan()
+        # self.updateBook()
+        self.testMyMarket()
         self.balanceBook()
 
-    def tradePlan(self):
-        print(self.algoName, "*", "In trade plan...")
-        self.availableOffer = int(round(self.availableOffer, 0))
-        self.availableBid = int(round(self.availableBid, 0))
+    def buyTheRatio(self):
+        print(self.algoName, "*", "Buy the ratio ")
+        try:
+            t0Contracts = int(
+                round(
+                    self.getOfferPrice(self.symbols[1]) * self.availableOffer
+                    * self.getContractMultiplier(self.symbols[1])
+                    / (self.getBidPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]))
+                    , 0)
+            )
 
-        if self.myRatioBid > self.ratioOfferPrice > 0:
-            print(self.algoName, "*","Buy the ratio ")
-            try:
-                t0Contracts = int(
-                    round(
-                        self.getOfferPrice(self.symbols[1]) * self.availableOffer
-                        * self.getContractMultiplier(self.symbols[1])
-                        / (self.getBidPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0]))
-                        , 0)
-                )
+            self.tradeRatio(self.symbols[1], self.getOfferPrice(self.symbols[1]),
+                            min(self.availableOffer, self.tradeSize), self.symbols[0],
+                            self.getBidPrice(self.symbols[0]), min(t0Contracts, self.tradeSize))
+            self.resetBidOffer(0.997, 0.997)
+            self.updateBook()
 
-                self.tradeRatio(self.symbols[1], self.getOfferPrice(self.symbols[1]), min(self.availableOffer, self.tradeSize), self.symbols[0], self.getBidPrice(self.symbols[0]), min(t0Contracts,self.tradeSize))
-                self.resetBidOffer(0.997, 0.997)
+        except:
+            print("cRUSDIndx* error en Buy the Ratio")
 
-            except:
-                print("self.algoName", "*","error en Buy the Ratio")
 
-        if self.ratioBidPrice > self.myRatioOffer > 0:
-            print("self.algoName", "*","Sell the ratio ")
-            print("self.algoName", "*", self.myRatioOffer, self.ratioBidPrice)
-            try:
-                t0Contracts = int(round(self.getBidPrice(self.symbols[1]) * self.availableBid*self.getContractMultiplier(self.symbols[1]) / (self.getOfferPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0])), 0))
 
-                self.tradeRatio(self.symbols[0], self.getOfferPrice(self.symbols[0]), min(t0Contracts, self.tradeSize),
-                                self.symbols[1], self.getBidPrice(self.symbols[1]), min(self.availableOffer, self.tradeSize))
-                self.resetBidOffer(1.003, 1.003)
+    def sellTheRatio(self):
+        print("self.algoName", "*", "Sell the ratio ")
+        print("self.algoName", "*", self.myRatioOffer, self.ratioBidPrice)
+        try:
+            t0Contracts = int(round(
+                self.getBidPrice(self.symbols[1]) * self.availableBid * self.getContractMultiplier(self.symbols[1]) / (
+                            self.getOfferPrice(self.symbols[0]) * self.getContractMultiplier(self.symbols[0])), 0))
 
-            except:
-                print("self.algoName", "*"," error en Sell the Ratio")
+            self.tradeRatio(self.symbols[0], self.getOfferPrice(self.symbols[0]), min(t0Contracts, self.tradeSize),
+                            self.symbols[1], self.getBidPrice(self.symbols[1]),
+                            min(self.availableOffer, self.tradeSize))
+            self.resetBidOffer(1.003, 1.003)
+
+        except:
+            print("self.algoName", "*", " error en Sell the Ratio")
+
 
     
 if __name__ == '__main__':
