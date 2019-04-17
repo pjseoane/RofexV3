@@ -30,8 +30,8 @@ class cRatio(r2t.cRatio):
             )
 
             self.tradeRatio(self.symbols[1], self.getOfferPrice(self.symbols[1]),
-                            min(self.availableOffer, self.tradeSize), self.symbols[0],
-                            self.getBidPrice(self.symbols[0]), min(t0Contracts, self.tradeSize))
+                             min(self.availableOffer, self.tradeSize), self.symbols[0],
+                             self.getBidPrice(self.symbols[0]), min(t0Contracts, self.tradeSize))
             self.resetBidOffer(0.997, 0.997)
             self.updateBook()
 
@@ -65,8 +65,8 @@ if __name__ == '__main__':
 
     # ticker1 = "AY24DJun19"
     # ticker2 = "AY24Jun19"
-    myBid   = 933
-    myOffer = 940
+    myBid   = 950
+    myOffer = 955
 
     tradeContracts = 5
     maxExposition = 100

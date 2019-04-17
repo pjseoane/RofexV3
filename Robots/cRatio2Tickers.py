@@ -74,12 +74,12 @@ class cRatio(masterR.zRobot):
     def testMyMarket(self):
         #print("cr2t* In trade plan...")
 
-        if self.myRatioBid > 0:
+        if self.ratioOfferPrice > 0:
             if self.myRatioBid > self.ratioOfferPrice:
                 self.buyTheRatio()
                 self.resetBidOffer(0.997, 0.997)
 
-        if self.myRatioOffer > 0:
+        if self.ratioBidPrice > 0:
             if self.ratioBidPrice > self.myRatioOffer:
                 self.sellTheRatio()
                 self.resetBidOffer(1.003, 1.003)
@@ -102,7 +102,7 @@ class cRatio(masterR.zRobot):
         self.singleTrade("BUY", buyTicker, str(buyPrice), str(int(buyContracts)))
         self.singleTrade("SELL", sellTicker, str(sellPrice), str(int(sellContracts)))
 
-        # print("cR2t *", buyTicker, buyPrice,buyContracts,sellTicker,sellPrice,sellContracts )
+        print("cR2t *", buyTicker, buyPrice,buyContracts,sellTicker,sellPrice,sellContracts )
 
 
 if __name__ == '__main__':
