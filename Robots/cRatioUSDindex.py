@@ -14,10 +14,9 @@ class cRatio(r2t.cRatio):
         self.mdOutput()
         self.ratioCalc()
         self.printLineRatio()
-        self.updateBook()
-        self.testTradeOpportunity()
+        #self.updateBook()
+        self.testMyMarket()
         # self.balanceBook()
-
 
     def buyTheRatio(self):
         print("cRUSDIndx* Buy the ratio ")
@@ -34,6 +33,7 @@ class cRatio(r2t.cRatio):
                             min(self.availableOffer, self.tradeSize), self.symbols[0],
                             self.getBidPrice(self.symbols[0]), min(t0Contracts, self.tradeSize))
             self.resetBidOffer(0.997, 0.997)
+            self.updateBook()
 
         except:
             print("cRUSDIndx* error en Buy the Ratio")
@@ -50,9 +50,11 @@ class cRatio(r2t.cRatio):
                             self.symbols[1], self.getBidPrice(self.symbols[1]),
                             min(self.availableBid, self.tradeSize))
             self.resetBidOffer(1.003, 1.003)
+            self.updateBook()
 
         except:
             print("cRUSDIndx*  error en Sell the Ratio")
+
 
 if __name__ == '__main__':
     print("cRatio USDIndex")
@@ -63,8 +65,8 @@ if __name__ == '__main__':
 
     # ticker1 = "AY24DJun19"
     # ticker2 = "AY24Jun19"
-    myBid   = 930
-    myOffer = 935
+    myBid   = 933
+    myOffer = 940
 
     tradeContracts = 5
     maxExposition = 100

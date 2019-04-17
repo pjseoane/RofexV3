@@ -29,7 +29,7 @@ class cRatio(masterR.zRobot):
 
         print("***********  Algo Name:", self.algoName)
 
-    def setRatioMarket(self,bid,offer,size):
+    def setMyMarket(self, bid, offer, size):
         self.myRatioBid = bid
         self.myRatioOffer = offer
         self.tradeSize = size
@@ -71,32 +71,28 @@ class cRatio(masterR.zRobot):
         except:
             "CR2t* - Some Error ...."
 
+    def testMyMarket(self):
+        #print("cr2t* In trade plan...")
 
-    def testTradeOpportunity(self):
-        print("cr2t* In trade plan...")
+        if self.myRatioBid > 0:
+            if self.myRatioBid > self.ratioOfferPrice:
+                self.buyTheRatio()
+                self.resetBidOffer(0.997, 0.997)
 
-        if self.myRatioBid > 0 and self.myRatioBid > self.ratioOfferPrice:
-            self.buyTheRatio()
-            self.resetBidOffer(0.997, 0.997)
+        if self.myRatioOffer > 0:
+            if self.ratioBidPrice > self.myRatioOffer:
+                self.sellTheRatio()
+                self.resetBidOffer(1.003, 1.003)
 
-
-        if self.myRatioOffer > 0 and self.ratioBidPrice > self.myRatioOffer:
-            self.sellTheRatio()
-            self.resetBidOffer(1.003, 1.003)
-
-        print("cr27* out trade plan")
+        #print("cr27* out trade plan")
 
     def buyTheRatio(self):
 
         print("cR2t* Buy the ratio ")
 
-
-
     def sellTheRatio(self):
         # pass
         print("cR2t* Sell the ratio ")
-
-
 
     def resetBidOffer(self, factorDown, factorUp):
         self.myRatioBid *= factorDown
@@ -107,7 +103,6 @@ class cRatio(masterR.zRobot):
         self.singleTrade("SELL", sellTicker, str(sellPrice), str(int(sellContracts)))
 
         # print("cR2t *", buyTicker, buyPrice,buyContracts,sellTicker,sellPrice,sellContracts )
-
 
 
 if __name__ == '__main__':
