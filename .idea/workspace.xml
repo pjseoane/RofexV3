@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="01112a75-fa6e-422d-87b9-e7ecf9a2c65d" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Robots/cRatio2Tickers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1548">
+              <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Robots/cRatioUSDindex.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="1" selection-start-column="1" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/cRofexLoginWS.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="23" column="29" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Robots/cAY24ccl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="648">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1/quickfix50sp2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Scripts/AY24ccl.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Robots/cZrobot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="918">
+              <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+              <folding>
+                <element signature="e#504#1203#0" />
+                <element signature="e#1255#1727#0" />
+                <element signature="e#1775#2359#0" />
+                <element signature="e#2396#3509#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Classes/cGetMarketData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="195" column="5" selection-start-line="195" selection-start-column="5" selection-end-line="195" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Classes/cBookAnalysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="32" selection-start-line="2" selection-end-line="2" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>dict2</find>
+      <find>sym</find>
+      <find>self..</find>
+      <find>getOfferPrice(index)</find>
+      <find>t0BidPrice</find>
+      <find>t0BidSize</find>
+      <find>t1offerSize</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>marketDataDict</replace>
+      <replace>symbols[0]</replace>
+      <replace>self.</replace>
+      <replace>indexOfferPrice</replace>
+      <replace>getBidSize(self.symbols[0])</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Home" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Classes/rofexLogin.py" />
+        <option value="$PROJECT_DIR$/Classes/cRofexMessage.py" />
+        <option value="$PROJECT_DIR$/Scripts/jsonTest.py" />
+        <option value="$PROJECT_DIR$/Classes/goRobot.py" />
+        <option value="$PROJECT_DIR$/Classes/cAlgoIndex.py" />
+        <option value="$PROJECT_DIR$/Classes/cAlgoBase.py" />
+        <option value="$PROJECT_DIR$/../RofexV4/Classes/cRofexLogin.py" />
+        <option value="$PROJECT_DIR$/../RofexV4/Classes/cGetMarketData.py" />
+        <option value="$PROJECT_DIR$/Classes/cSuscribeThis.py" />
+        <option value="$PROJECT_DIR$/Classes/cBasicRobot.py" />
+        <option value="$PROJECT_DIR$/Robots/cRobotZero.py" />
+        <option value="$PROJECT_DIR$/Robots/cZRobot.py" />
+        <option value="$PROJECT_DIR$/Robots/cBasicRobot.py" />
+        <option value="$PROJECT_DIR$/Robots/zRobot.py" />
+        <option value="$PROJECT_DIR$/Robots/indexUSD.py" />
+        <option value="$PROJECT_DIR$/Robots/cIndex2.py" />
+        <option value="$PROJECT_DIR$/Scripts/futureIndex.py" />
+        <option value="$PROJECT_DIR$/Robots/cRatioRob.py" />
+        <option value="$PROJECT_DIR$/Robots/cIndexUSD.py" />
+        <option value="$PROJECT_DIR$/Robots/cRatio" />
+        <option value="$PROJECT_DIR$/Classes/cRofexLogin.py" />
+        <option value="$PROJECT_DIR$/Classes/cBookAnalysis.py" />
+        <option value="$PROJECT_DIR$/Classes/cGetMarketData.py" />
+        <option value="$PROJECT_DIR$/Robots/cRatio.py" />
+        <option value="$PROJECT_DIR$/Robots/cCCLay24.py" />
+        <option value="$PROJECT_DIR$/Robots/cZrobot.py" />
+        <option value="$PROJECT_DIR$/Scripts/AY24ccl.py" />
+        <option value="$PROJECT_DIR$/Robots/cRatio2Tickers.py" />
+        <option value="$PROJECT_DIR$/Robots/cAY24ccl.py" />
+        <option value="$PROJECT_DIR$/FIXtest/cRofexLoginFIX.py" />
+        <option value="$PROJECT_DIR$/Robots/cRatioUSDindex.py" />
+        <option value="$PROJECT_DIR$/Classes/cRofexLoginWS.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-1" />
+    <option name="y" value="4" />
+    <option name="width" value="1318" />
+    <option name="height" value="727" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="RofexV3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RofexV3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RofexV3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RofexV3" type="462c0819:PsiDirectoryNode" />
+              <item name="Classes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RofexV3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RofexV3" type="462c0819:PsiDirectoryNode" />
+              <item name="Robots" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ACTIVE_CLOUD_PROJECT_ACCOUNT" value="pjseoane@gmail.com" />
+    <property name="ACTIVE_CLOUD_PROJECT_ID" value="rofex-1542569684693" />
+    <property name="ACTIVE_CLOUD_PROJECT_NAME" value="ROFEX" />
+    <property name="ACTIVE_CLOUD_PROJECT_NUMBER" value="621284897926" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Anaconda3/Lib/site-packages/quickfix-1.15.1-py3.7-win-amd64.egg/_quickfix.cp37-win_amd64.pyd" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pauli\Documents\Python Projects\RofexV3\Robots" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pauli\Documents\Python Projects\RofexV3\FIXtest" />
+      <recent name="C:\Users\pauli\Documents\Python Projects\RofexV3\Robots" />
+      <recent name="C:\Users\pauli\Documents\Python Projects\RofexV4\Classes" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.cRofexLoginWS">
+    <configuration name="cGetMarketData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RofexV3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Classes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Classes/cGetMarketData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cRatio (1)" type="PythonConfigurationType" factoryName="Python">
+      <module name="RofexV3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Robots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\pauli\Documents\Python Projects\RofexV3\Robots\cRatio2Tickers.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cRatioUSDindex" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RofexV3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Robots" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Robots/cRatioUSDindex.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="cRofexLoginWS" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RofexV3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Classes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Classes/cRofexLoginWS.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="quickfix50sp2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RofexV3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1/quickfix50sp2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="setup" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="RofexV3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1/setup.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.cRofexLoginWS" />
+        <item itemvalue="Python.cGetMarketData" />
+        <item itemvalue="Python.setup" />
+        <item itemvalue="Python.cRatioUSDindex" />
+        <item itemvalue="Python.quickfix50sp2" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="01112a75-fa6e-422d-87b9-e7ecf9a2c65d" name="Default Changelist" comment="" />
+      <created>1553897878496</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553897878496</updated>
+    </task>
+    <task id="LOCAL-00001" summary="1st Version RofexV3">
+      <created>1553905733052</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1553905733052</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1st Version RofexV3">
+      <created>1553912567441</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1553912567441</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1st Version RofexV3">
+      <created>1553989350695</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1553989350695</updated>
+    </task>
+    <task id="LOCAL-00004" summary="msg dictionary">
+      <created>1554000360570</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1554000360570</updated>
+    </task>
+    <task id="LOCAL-00005" summary="msg dictionary">
+      <created>1554004251846</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1554004251846</updated>
+    </task>
+    <task id="LOCAL-00006" summary="msg dictionary">
+      <created>1554075174201</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1554075174201</updated>
+    </task>
+    <task id="LOCAL-00007" summary="msg dictionary">
+      <created>1554157317308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1554157317308</updated>
+    </task>
+    <task id="LOCAL-00008" summary="algoIndexOK">
+      <created>1554160054152</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1554160054152</updated>
+    </task>
+    <task id="LOCAL-00009" summary="algoIndexOK">
+      <created>1554164205924</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1554164205924</updated>
+    </task>
+    <task id="LOCAL-00010" summary="algoIndexOK">
+      <created>1554175638892</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1554175638893</updated>
+    </task>
+    <task id="LOCAL-00011" summary="algoIndexOK">
+      <created>1554175848703</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1554175848703</updated>
+    </task>
+    <task id="LOCAL-00012" summary="futureIndex Script">
+      <created>1554175945123</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1554175945123</updated>
+    </task>
+    <task id="LOCAL-00013" summary="futureIndex Script">
+      <created>1554233087345</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1554233087346</updated>
+    </task>
+    <task id="LOCAL-00014" summary="futureIndex Script">
+      <created>1554233968607</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1554233968607</updated>
+    </task>
+    <task id="LOCAL-00015" summary="zRobot">
+      <created>1554240053777</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1554240053777</updated>
+    </task>
+    <task id="LOCAL-00016" summary="zRobot">
+      <created>1554240552793</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1554240552793</updated>
+    </task>
+    <task id="LOCAL-00017" summary="zRobot">
+      <created>1554340062385</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1554340062386</updated>
+    </task>
+    <task id="LOCAL-00018" summary="zRobot">
+      <created>1554340120511</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1554340120511</updated>
+    </task>
+    <task id="LOCAL-00019" summary="zRobot">
+      <created>1554344658800</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1554344658800</updated>
+    </task>
+    <task id="LOCAL-00020" summary="new suscribe msg">
+      <created>1554376991396</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1554376991396</updated>
+    </task>
+    <task id="LOCAL-00021" summary="new suscribe msg">
+      <created>1554430376813</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1554430376813</updated>
+    </task>
+    <task id="LOCAL-00022" summary="new suscribe msg">
+      <created>1554463637519</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1554463637519</updated>
+    </task>
+    <task id="LOCAL-00023" summary="book Analysis">
+      <created>1554686905718</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1554686905718</updated>
+    </task>
+    <task id="LOCAL-00024" summary="book Analysis">
+      <created>1554776316997</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1554776316997</updated>
+    </task>
+    <task id="LOCAL-00025" summary="book Analysis">
+      <created>1554866025444</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1554866025444</updated>
+    </task>
+    <task id="LOCAL-00026" summary="book Analysis">
+      <created>1554895252386</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1554895252386</updated>
+    </task>
+    <task id="LOCAL-00027" summary="book Analysis">
+      <created>1554949671678</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1554949671678</updated>
+    </task>
+    <task id="LOCAL-00028" summary="book Analysis">
+      <created>1555035911058</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1555035911058</updated>
+    </task>
+    <task id="LOCAL-00029" summary="book Analysis">
+      <created>1555039932077</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1555039932077</updated>
+    </task>
+    <task id="LOCAL-00030" summary="book Analysis">
+      <created>1555039978076</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1555039978076</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Home Branch CRatio2Tickers">
+      <created>1555178797253</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1555178797253</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Home Branch CRatio2Tickers">
+      <created>1555189111176</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1555189111176</updated>
+    </task>
+    <task id="LOCAL-00033" summary="ccl ay24">
+      <created>1555190884010</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1555190884010</updated>
+    </task>
+    <task id="LOCAL-00034" summary="ccl ay24">
+      <created>1555467173734</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1555467173734</updated>
+    </task>
+    <task id="LOCAL-00035" summary="ccl ay24">
+      <created>1555500151218</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1555500151218</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-1" y="4" width="1318" height="727" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32670906" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49961627" weight="0.32761577" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6738437" visible="true" weight="0.33099824" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32874355" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49960348" weight="0.27845037" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3261339" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.23138298" side_tool="true" weight="0.7516199" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.76861703" weight="0.36464968" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Google Cloud Storage" order="3" show_stripe_button="false" />
+      <window_info anchor="right" id="Json Parser" order="4" weight="0.078112915" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17092034" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3288364" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6983759" visible="true" weight="0.2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32874355" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32874355" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32874355" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.30162412" side_tool="true" visible="true" weight="0.2" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.7783661" weight="0.45063695" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Google Cloud Storage" order="3" show_stripe_button="false" />
+      <window_info anchor="right" id="Json Parser" order="4" visible="true" weight="0.078112915" />
+    </layout-to-restore>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1st Version RofexV3" />
+    <MESSAGE value="msg dictionary" />
+    <MESSAGE value="algoIndexOK" />
+    <MESSAGE value="futureIndex Script" />
+    <MESSAGE value="zRobot" />
+    <MESSAGE value="new suscribe msg" />
+    <MESSAGE value="book Analysis" />
+    <MESSAGE value="Home Branch CRatio2Tickers" />
+    <MESSAGE value="ccl ay24" />
+    <option name="LAST_COMMIT_MESSAGE" value="ccl ay24" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Classes/cRofexMessage.py" />
+    <entry file="file://$PROJECT_DIR$/Classes/goRobot.py" />
+    <entry file="file://$PROJECT_DIR$/../RofexV4/Classes/cGetMarketData.py" />
+    <entry file="file://$PROJECT_DIR$/../RofexV4/Classes/cRofexLogin.py" />
+    <entry file="file://$PROJECT_DIR$/../RofexV4/Classes/cAlgoIndex.py" />
+    <entry file="file://$PROJECT_DIR$/../RofexV4/Classes/cAlgoBase.py" />
+    <entry file="file://$PROJECT_DIR$/Classes/cBasicAlgo.py" />
+    <entry file="file://$PROJECT_DIR$/Classes/cAlgoIndex.py" />
+    <entry file="file://$PROJECT_DIR$/Scripts/jsonTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="34" column="31" selection-start-line="34" selection-end-line="34" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Robots/cBasicRobot.py" />
+    <entry file="file://$PROJECT_DIR$/Robots/zRobot.py" />
+    <entry file="file://$PROJECT_DIR$/Robots/indexUSD.py" />
+    <entry file="file://$PROJECT_DIR$/Robots/cRatio" />
+    <entry file="file://$PROJECT_DIR$/Robots/cIndexUSD.py" />
+    <entry file="file://$PROJECT_DIR$/Scripts/futureIndex.py" />
+    <entry file="file://$PROJECT_DIR$/FIXtest/cRofexLoginFIX.py" />
+    <entry file="file://$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="90" selection-start-line="90" selection-end-line="90" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Robots/cRatio2Tickers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1548">
+          <caret line="86" column="9" selection-start-line="86" selection-start-column="9" selection-end-line="86" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Robots/cRatioUSDindex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/cRofexLoginWS.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Robots/cAY24ccl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/quickfix-1.15.1/quickfix-1.15.1/quickfix50sp2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Scripts/AY24ccl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Robots/cZrobot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+          <folding>
+            <element signature="e#504#1203#0" />
+            <element signature="e#1255#1727#0" />
+            <element signature="e#1775#2359#0" />
+            <element signature="e#2396#3509#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/cBookAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="32" selection-start-line="2" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Classes/cGetMarketData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="195" column="5" selection-start-line="195" selection-start-column="5" selection-end-line="195" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
