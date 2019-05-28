@@ -38,8 +38,6 @@ class cAY24ccl(r2t.cRatio):
         except:
             print("cRUSDIndx* error en Buy the Ratio")
 
-
-
     def sellTheRatio(self):
         print("self.algoName", "*", "Sell the ratio ")
         print("self.algoName", "*", self.myRatioOffer, self.ratioBidPrice)

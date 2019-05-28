@@ -2,6 +2,9 @@ import requests
 import simplejson
 
 
+#class cS
+
+
 class cSetUpEnvironment:
 
     trades: int

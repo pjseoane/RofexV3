@@ -1,4 +1,4 @@
-
+#import quickfix
 
 from Robots import cRatio2Tickers as r2t
 

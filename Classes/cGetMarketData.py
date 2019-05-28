@@ -2,7 +2,7 @@ import websocket
 import threading
 import simplejson
 
-from Classes import cRofexLogin as rLogin
+from Classes import cRofexLoginWS as rLogin
 from time import sleep
 
 
